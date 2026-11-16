@@ -1,6 +1,10 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {pageUrls,helpDescription,softwareSchema} from '../src/lib/seo.mjs';
+import {pageUrls,helpDescription,softwareSchema,siteOrigin} from '../src/lib/seo.mjs';
+test('pending custom-domain certificates do not produce HTTP canonical metadata',()=>{
+ assert.equal(siteOrigin('http://biglazycatwriter.top'),'https://biglazycatwriter.top');
+ assert.equal(siteOrigin('https://biglazycat-writer.github.io'),'https://biglazycat-writer.github.io');
+});
 test('translated canonical URLs remain correct at domain root and project paths',()=>{
  const project=pageUrls('https://biglazycat-writer.github.io','/website/','/website/en/help/writing/editor/');
  assert.equal(project.zh,'https://biglazycat-writer.github.io/website/help/writing/editor/');

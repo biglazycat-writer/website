@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import {readFile,readdir,access} from 'node:fs/promises';
 import path from 'node:path';
+import {siteOrigin} from '../src/lib/seo.mjs';
 const base=(process.env.BASE_PATH??'/website').replace(/\/$/,'');
-const site=process.env.SITE_URL||'https://biglazycat-writer.github.io';
+const site=siteOrigin(process.env.SITE_URL||undefined);
 const root=path.resolve('dist');
 const sitemap=await readFile(path.join(root,'sitemap.xml'),'utf8');
 const robots=await readFile(path.join(root,'robots.txt'),'utf8');

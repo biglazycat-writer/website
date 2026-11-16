@@ -1,3 +1,6 @@
+export function siteOrigin(value = 'https://biglazycat-writer.github.io') {
+  return value.replace(/^http:/, 'https:');
+}
 export function pageUrls(site, base, pathname) {
   const prefix = base.replace(/\/$/, '');
   const path = pathname.slice(prefix.length).replace(/^\//, '');
