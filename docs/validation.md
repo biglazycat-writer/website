@@ -16,4 +16,6 @@
 
 GitHub Pages 已成功部署，访问地址：`https://biglazycat-writer.github.io/website/`。首次成功发布的 Actions 记录为 `43835846210`，构建、测试、类型检查、静态链接检查、SEO 检查与部署全部通过；首页、AI 配置帮助深链、robots.txt 与 sitemap.xml 均返回 HTTP 200。
 
-下载使用已导入的静态 JSON，未启用自动 Release 同步。自定义域名和 Cloudflare 尚未接入。按用户要求，新门户仅提供产品营销内容，旧 web 项目完整保留，在线工具和登录不迁移。
+下载使用已导入的静态 JSON，未启用自动 Release 同步。已绑定 biglazycatwriter.top，并成功部署域名根路径版本；首页、CSS 和产品截图均返回 HTTP 200。Google 与 Cloudflare 公共 DNS 已返回 GitHub Pages 四个 IP，www 指向 biglazycat-writer.github.io；Cloudflare 暂用 DNS only 等待 GitHub 证书签发。
+
+修复了证书申请期间 configure-pages 返回 HTTP origin 导致 SEO 检查失败的问题，正式 canonical 始终使用 HTTPS；站内语言切换使用相对路径。GitHub 证书状态与最终 HTTPS 强制跳转仍需确认。按用户要求，新门户仅提供产品营销内容，旧 web 项目完整保留，在线工具和登录不迁移。

@@ -50,7 +50,7 @@ const graph = [
         <a href={`${home}#download`}>{english ? 'Download' : '下载'}</a>
         <a href={`${home}#purchase`}>{english ? 'License' : '购买'}</a>
         <a href={help}>{english ? 'Help' : '帮助'}</a>
-        <a href={noindex ? `${base}/${english ? '' : 'en/'}` : english ? urls.zh : urls.en}>{english ? '中文' : 'English'}</a>
+        <a href={noindex ? `${base}/${english ? '' : 'en/'}` : new URL(english ? urls.zh : urls.en).pathname}>{english ? '中文' : 'English'}</a>
       </nav>
     </header>
     <main id="main"><slot /></main>
