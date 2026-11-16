@@ -1,0 +1,14 @@
+/* 门户艺术装饰件的样式。颜色全部来自 .page 作用域的纸墨变量。 */
+
+.brush {
+  display: block;
+  width: 96px;
+  height: 9px;
+  margin: 16px auto 0;
+  color: var(--portal-accent);
+}
+
+
+
+
+

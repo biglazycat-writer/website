@@ -1,0 +1,106 @@
+{
+  "autoSync": false,
+  "version": "0.4.6",
+  "date": "2026-11-16",
+  "fallbackUrl": "https://github.com/biglazycat-writer/biglazycat-release/releases/latest",
+  "channels": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases"
+    },
+    {
+      "name": "Gitee",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases"
+    }
+  ],
+  "assets": [
+    {
+      "platform": "windows",
+      "name": "安装版本 · GitHub",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.6/biglazycat-desktop-0.4.6-windows-amd64-installer.exe",
+      "kind": "installer",
+      "arch": "amd64",
+      "source": "github"
+    },
+    {
+      "platform": "windows",
+      "name": "安装版本 · Gitee",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.6/biglazycat-desktop-0.4.6-windows-amd64-installer.exe",
+      "kind": "installer",
+      "arch": "amd64",
+      "source": "gitee"
+    },
+    {
+      "platform": "macos",
+      "name": "Apple 芯片版本 · GitHub",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.6/biglazycat-desktop-0.4.6-macos-arm64.dmg",
+      "kind": "dmg",
+      "arch": "arm64",
+      "source": "github"
+    },
+    {
+      "platform": "macos",
+      "name": "Apple 芯片版本 · Gitee",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.6/biglazycat-desktop-0.4.6-macos-arm64.dmg",
+      "kind": "dmg",
+      "arch": "arm64",
+      "source": "gitee"
+    },
+    {
+      "platform": "macos",
+      "name": "Intel 版本 · GitHub",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.6/biglazycat-desktop-0.4.6-macos-amd64.dmg",
+      "kind": "dmg",
+      "arch": "amd64",
+      "source": "github"
+    },
+    {
+      "platform": "macos",
+      "name": "Intel 版本 · Gitee",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.6/biglazycat-desktop-0.4.6-macos-amd64.dmg",
+      "kind": "dmg",
+      "arch": "amd64",
+      "source": "gitee"
+    },
+    {
+      "platform": "android",
+      "name": "APK 版本 · GitHub",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.6/biglazycat-mobile-v0.4.6-release.apk",
+      "kind": "apk",
+      "arch": "",
+      "source": "github"
+    },
+    {
+      "platform": "android",
+      "name": "APK 版本 · Gitee",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.6/biglazycat-mobile-v0.4.6-release.apk",
+      "kind": "apk",
+      "arch": "",
+      "source": "gitee"
+    },
+    {
+      "platform": "linux",
+      "name": "deb 版本 · GitHub",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.6/biglazycat-desktop_0.4.6_amd64.deb",
+      "kind": "deb",
+      "arch": "amd64",
+      "source": "github"
+    },
+    {
+      "platform": "linux",
+      "name": "deb 版本 · Gitee",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.6/biglazycat-desktop_0.4.6_amd64.deb",
+      "kind": "deb",
+      "arch": "amd64",
+      "source": "gitee"
+    },
+    {
+      "platform": "linux",
+      "name": "AppImage 版本 · GitHub",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.6/biglazycat-desktop-0.4.6-x86_64.AppImage",
+      "kind": "appimage",
+      "arch": "amd64",
+      "source": "github"
+    }
+  ]
+}

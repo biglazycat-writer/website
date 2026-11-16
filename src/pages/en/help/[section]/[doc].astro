@@ -1,0 +1,7 @@
+---
+import Help from '../../../../components/Help.astro';
+import data from '../../../../data/en-US/help.json';
+import {helpEntries} from '../../../../lib/help.mjs';
+export function getStaticPaths(){return helpEntries(data).map(({section,doc})=>({params:{section,doc}}));}
+---
+<Help language="en-US" section={Astro.params.section} doc={Astro.params.doc} />

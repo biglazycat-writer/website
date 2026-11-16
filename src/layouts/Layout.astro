@@ -1,0 +1,62 @@
+---
+import styles from '../components/PortalPage.module.css';
+import downloads from '../data/downloads.json';
+import seo from '../data/seo.json';
+import {pageUrls} from '../lib/seo.mjs';
+const { language = 'zh-CN', canonicalPath = Astro.url.pathname, noindex = false, structuredData = [] } = Astro.props;
+const english = language === 'en-US';
+const defaults = english ? seo['en-US'] : seo['zh-CN'];
+const { title = defaults.title, description = defaults.description } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const home = `${base}/${language === 'en-US' ? 'en/' : ''}`;
+const help = `${base}/${language === 'en-US' ? 'en/' : ''}help/`;
+const urls = pageUrls(Astro.site, import.meta.env.BASE_URL, canonicalPath);
+const root = new URL(import.meta.env.BASE_URL, Astro.site).href;
+const image = new URL(`${base}/portal/screenshots/hero-desktop.webp`, Astro.site).href;
+const graph = [
+  {'@type':'Organization','@id':`${root}#organization`,name:'大懒猫创作平台',alternateName:'BigLazyCat Creator',url:root,logo:new URL(`${base}/logo.png`,Astro.site).href},
+  {'@type':'WebSite','@id':`${root}#website`,url:root,name:'大懒猫创作平台',alternateName:'BigLazyCat Creator',inLanguage:['zh-CN','en-US'],publisher:{'@id':`${root}#organization`}},
+  {'@type':'WebPage','@id':`${urls.canonical}#webpage`,url:urls.canonical,name:title,description,inLanguage:language,isPartOf:{'@id':`${root}#website`}},
+  ...structuredData,
+];
+---
+<!doctype html>
+<html lang={language}>
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width" />
+    <title>{title}</title><meta name="description" content={description} />
+    <meta name="keywords" content={defaults.keywords} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+    <link rel="icon" href={`${base}/favicon.ico`} />
+    <link rel="canonical" href={urls.canonical} />
+    {!noindex && <><link rel="alternate" hreflang="zh-CN" href={urls.zh} /><link rel="alternate" hreflang="en" href={urls.en} /><link rel="alternate" hreflang="x-default" href={urls.zh} /></>}
+    <meta property="og:title" content={title} /><meta property="og:description" content={description} />
+    <meta property="og:type" content="website" /><meta property="og:image" content={image} />
+    <meta property="og:image:alt" content={english ? 'BigLazyCat Creator desktop writing workspace' : '大懒猫创作平台桌面写作工作台'} />
+    <meta property="og:url" content={urls.canonical} /><meta property="og:site_name" content={english ? 'BigLazyCat Creator' : '大懒猫创作平台'} />
+    <meta property="og:locale" content={english ? 'en_US' : 'zh_CN'} />
+    <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={image} />
+    {seo.verification.google && <meta name="google-site-verification" content={seo.verification.google} />}
+    {seo.verification.bing && <meta name="msvalidate.01" content={seo.verification.bing} />}
+    {seo.verification.baidu && <meta name="baidu-site-verification" content={seo.verification.baidu} />}
+    <script type="application/ld+json" set:html={JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c')} />
+  </head>
+  <body class={styles.page}>
+    <a class="skip" href="#main">{english ? 'Skip to content' : '跳到正文'}</a>
+    <header class="site-header">
+      <a class="brand" href={home}><img src={`${base}/logo.png`} width="36" height="36" alt="" />{english ? 'BigLazyCat Creator' : '大懒猫创作平台'}</a>
+      <nav aria-label={english ? 'Navigation' : '站点导航'}>
+        <a href={`${home}#features`}>{english ? 'Features' : '特色'}</a>
+        <a href={`${home}#download`}>{english ? 'Download' : '下载'}</a>
+        <a href={`${home}#purchase`}>{english ? 'License' : '购买'}</a>
+        <a href={help}>{english ? 'Help' : '帮助'}</a>
+        <a href={noindex ? `${base}/${english ? '' : 'en/'}` : english ? urls.zh : urls.en}>{english ? '中文' : 'English'}</a>
+      </nav>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer"><a href={help}>{english ? 'Documentation' : '使用帮助'}</a>{downloads.channels.map(channel => <a href={channel.url}>{channel.name}</a>)}<a href="mailto:biglazycatwriter@163.com">biglazycatwriter@163.com</a><p>© {new Date().getFullYear()} {english ? 'BigLazyCat Creator' : '大懒猫创作平台'}</p></footer>
+  </body>
+</html>
+<style is:global>
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:inherit}button{font:inherit}img{max-width:100%;height:auto}figure{margin:0}.site-header{position:sticky;top:0;z-index:100;background:rgba(242,242,240,.96);border-bottom:1px solid #e2e2e0;padding:18px max(24px,calc((100vw - 1280px)/2));display:flex;justify-content:space-between;gap:24px;align-items:center}.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;white-space:nowrap}nav{display:flex;flex-wrap:wrap;gap:22px;font-size:14px}nav a{text-decoration:none}nav a:hover{color:#2f4b7c}.site-footer{text-align:center;padding:54px 20px;border-top:1px solid #e2e2e0;font-size:14px;color:#6b6b70}.site-footer a{display:inline-block;margin:8px 12px}.skip{position:absolute;top:-100px}.skip:focus{top:8px;z-index:200;background:white;padding:12px}section[id]{scroll-margin-top:100px}@media(max-width:800px){.site-header{flex-direction:column;gap:14px;padding:12px 16px}nav{gap:16px;font-size:13px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>

@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Features from './Features';
+import zh from '../data/zh-CN/portal.json';
+import en from '../data/en-US/portal.json';
+import DesktopOffer from './DesktopOffer.astro';
+import seo from '../data/seo.json';
+import purchase from '../data/purchase.json';
+import downloads from '../data/downloads.json';
+import {softwareSchema} from '../lib/seo.mjs';
+const { language = 'zh-CN' } = Astro.props;
+const english = language === 'en-US';
+const copy = english ? en : zh;
+const description = (english ? seo['en-US'] : seo['zh-CN']).description;
+const base=import.meta.env.BASE_URL;
+const structuredData=[softwareSchema({site:Astro.site,base,language,description,purchase,downloads}),{
+  '@type':'FAQPage',mainEntity:Array.from({length:9},(_,i)=>({'@type':'Question',name:(copy.faq.items as Record<string,string>)[`q${i+1}`],acceptedAnswer:{'@type':'Answer',text:(copy.faq.items as Record<string,string>)[`a${i+1}`]}})),
+}];
+---
+<Layout language={language} structuredData={structuredData}>
+  <Features language={language} client:load />
+  <section class="product-intro">
+    <h2>{english ? 'A local-first workspace for writing and research' : '本地优先的 AI 写作与小说创作软件'}</h2>
+    <p>{english ? 'BigLazyCat Creator combines Markdown writing, linked notes, AI assistance and research tools in one workspace. Plan chapters with mind maps, collect references in canvas and PDF views, and prepare articles and books for publishing. Your work stays in files on your own device.' : '大懒猫创作平台把 Markdown 写作、双向链接、AI 助手与资料管理放在同一个工作台。用思维导图梳理小说大纲，用画布整理人物与素材，阅读和批注 PDF，完成公众号排版与书籍制作。作品以文件保存在你自己的设备上，适合小说作者、公众号作者和知识创作者。'}</p>
+    <p class="guide-links"><a href={`${base}${english?'en/':''}help/writing/editor/`}>{english?'Writing guide':'写作功能指南'}</a><a href={`${base}${english?'en/':''}help/quickstart/aiSetup/`}>{english?'Set up AI':'AI 模型配置'}</a><a href={`${base}${english?'en/':''}help/quickstart/download/`}>{english?'Installation guide':'下载与安装指南'}</a></p>
+  </section>
+  <DesktopOffer language={language} />
+  <section class="offer faq" id="faq"><h2>{copy.faq.title}</h2>{Array.from({length:9}, (_,i) => <details><summary>{(copy.faq.items as Record<string,string>)[`q${i+1}`]}</summary><p>{(copy.faq.items as Record<string,string>)[`a${i+1}`]}</p></details>)}</section>
+</Layout>
+<style>
+  .product-intro{max-width:960px;margin:auto;padding:72px 24px;text-align:center}.product-intro h2{font-family:var(--portal-serif);font-size:clamp(26px,3.5vw,38px)}.product-intro p{line-height:1.9;color:var(--portal-text-3)}.guide-links{display:flex;justify-content:center;flex-wrap:wrap;gap:24px;font-size:14px}.guide-links a{color:var(--portal-ink)}
+  .faq{padding:90px 24px;max-width:900px;margin:auto;text-align:left}.faq h2{text-align:center;font-family:var(--portal-serif);font-size:clamp(28px,4vw,46px)}details{padding:22px 0;border-bottom:1px solid var(--portal-border)}summary{cursor:pointer;font-weight:600}details p{white-space:pre-line;line-height:1.9;color:var(--portal-text-3)}
+</style>

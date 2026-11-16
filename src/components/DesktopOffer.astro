@@ -1,0 +1,55 @@
+---
+import downloads from '../data/downloads.json';
+import purchase from '../data/purchase.json';
+import zh from '../data/zh-CN/portal.json';
+import en from '../data/en-US/portal.json';
+import { PlatformLogo } from './PlatformLogo';
+import { Globe, ShoppingCart, Download, ChevronDown } from 'lucide-react';
+const { language = 'zh-CN' } = Astro.props;
+const english = language === 'en-US';
+const lang = english ? 'en-US' : 'zh-CN';
+const copy = (english ? en : zh).desktop;
+type Asset = { platform:string;name:string;url:string };
+const assets: Asset[] = downloads.assets;
+const platforms = ['windows','macos','android','linux'] as const;
+const names = {windows:'Windows',macos:'macOS',android:'Android',linux:'Linux'};
+---
+<section class="desktop-offer" id="download">
+  <div class="offer-inner">
+    <h2>{copy.wantTitle}</h2>
+    <div id="purchase" class="purchase-info">
+      <p class="trial-note">{copy.trialNote}</p>
+      <p class="price-row">{purchase.price && <strong class="price">{purchase.price}</strong>}<span>{copy.priceNote}</span></p>
+      <a class="buy-button" href={purchase.url} target="_blank" rel="noopener noreferrer"><ShoppingCart size={16} />{purchase.buttonLabel[lang]}</a>
+      <p class="purchase-note">{purchase.description[lang]}</p>
+    </div>
+    <p class="download-hint">{english ? 'Select a platform to download. Open “All packages” for other formats and architectures.' : '点击系统图标下载安装包，展开「全部版本」选择格式和芯片架构。'}</p>
+    <div class="download-row">
+      {platforms.map(platform => {
+        const options = assets.filter(asset => asset.platform === platform);
+        const primary = options[0]?.url || downloads.fallbackUrl;
+        return <div class="platform-item">
+          <a class="platform-main" href={primary} aria-label={`${english ? 'Download' : '下载'} ${names[platform]}`}><span class="badge"><PlatformLogo platform={platform} /></span><span class="platform-name">{names[platform]}</span></a>
+          {downloads.version && <span class="version">v{downloads.version}</span>}
+          <details class="package-menu"><summary>{english ? 'All packages' : '全部版本'}<ChevronDown size={12} /></summary><div class="menu-panel" aria-label={`${names[platform]} ${english ? 'packages' : '安装包'}`}>
+            {options.length ? options.map(option => <a class="menu-item" href={option.url}><Download size={15} /><span><strong>{option.name}</strong><small>{english ? 'Version' : '版本'} {downloads.version}</small></span></a>) : <a class="menu-item" href={downloads.fallbackUrl}>{english ? 'Open release page' : '查看发布页'}</a>}
+          </div></details>
+        </div>;
+      })}
+      <div class="platform-item channels">
+        <a class="platform-main" href={downloads.channels[0]?.url || downloads.fallbackUrl} target="_blank" rel="noopener noreferrer"><span class="badge"><Globe size={30} /></span><span class="platform-name">{copy.channelTitle}</span></a>
+        <span class="version">{english ? 'All releases' : '所有历史版本'}</span>
+        <details class="package-menu"><summary>{english ? 'Release channels' : '发布渠道'}<ChevronDown size={12} /></summary><div class="menu-panel"><p>{copy.channelHint}</p>{downloads.channels.map(channel => <a class="menu-item" href={channel.url} target="_blank" rel="noopener noreferrer"><Globe size={15} /><span><strong>{channel.name}</strong><small>{channel.url}</small></span></a>)}</div></details>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .desktop-offer{padding:108px 24px 96px;border-bottom:1px solid var(--portal-border)}.offer-inner{max-width:760px;margin:auto;text-align:center}.offer-inner h2{font-family:var(--portal-serif);font-size:clamp(30px,3.8vw,46px);margin:0 0 40px;letter-spacing:-.01em}.purchase-info{scroll-margin-top:110px}.trial-note{font-size:13.5px;color:var(--portal-text-3);margin:0 0 10px}.price-row{display:flex;justify-content:center;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0}.price{font-size:26px;padding:2px 12px;background:var(--portal-highlight);border-radius:6px;font-variant-numeric:tabular-nums}.price-row span{font-size:13.5px;color:var(--portal-text-3)}.buy-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;margin-top:22px;padding:0 26px;background:var(--portal-charcoal);border:1px solid var(--portal-charcoal);border-radius:8px;color:white;font-weight:700;font-size:15px;text-decoration:none}.buy-button:hover{opacity:.88}.purchase-note{font-size:12px;color:var(--portal-text-3);line-height:1.7;margin:16px auto 0;max-width:560px}.download-hint{font-size:13px;color:var(--portal-text-3);margin:36px 0 0;line-height:1.7}.download-row{display:flex;justify-content:center;align-items:flex-start;gap:22px;flex-wrap:wrap;margin-top:36px}.platform-item{position:relative;min-width:104px;display:flex;flex-direction:column;align-items:center;gap:8px}.platform-main{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none}.badge{display:flex;justify-content:center;align-items:center;width:76px;height:76px;border:1px solid var(--portal-border-2);border-radius:50%;background:var(--portal-bg-soft);transition:background .18s,color .18s}.platform-main:hover .badge,.platform-main:focus-visible .badge{background:var(--portal-ink);border-color:var(--portal-ink);color:white}.platform-name{font-size:13.5px;font-weight:600;white-space:nowrap}.version{font-size:12px;color:var(--portal-text-3)}.package-menu summary{display:flex;justify-content:center;align-items:center;gap:4px;cursor:pointer;list-style:none;font-size:11.5px;color:var(--portal-text-3);padding:6px}.package-menu summary::-webkit-details-marker{display:none}.package-menu[open] summary{color:var(--portal-ink)}.platform-item:has(details[open]){z-index:30}.menu-panel{position:absolute;top:100%;left:50%;transform:translateX(-50%);width:300px;max-width:88vw;padding:8px;border:1px solid var(--portal-border-2);border-radius:14px;background:var(--portal-bg-soft);box-shadow:var(--portal-shadow-lg);text-align:left}.menu-panel p{margin:6px 10px;font-size:11.5px;color:var(--portal-text-3)}.menu-item{display:flex;align-items:center;gap:10px;padding:10px;text-decoration:none;border-radius:9px;font-size:12.5px}.menu-item:hover,.menu-item:focus-visible{background:var(--portal-ink-soft);color:var(--portal-ink)}.menu-item span{min-width:0}.menu-item strong{display:block;font-weight:600}.menu-item small{display:block;color:var(--portal-text-3);overflow-wrap:anywhere;margin-top:4px;line-height:1.5}@media(max-width:600px){.desktop-offer{padding:72px 18px}.download-row{gap:28px 18px}.platform-item{min-width:90px}.menu-panel{position:static;transform:none;width:260px;margin-top:8px}.platform-item:has(details[open]){flex-basis:100%}}@media(prefers-reduced-motion:reduce){.badge{transition:none}}
+</style>
+<script>
+  const menus = [...document.querySelectorAll<HTMLDetailsElement>('.package-menu')];
+  menus.forEach(menu => menu.addEventListener('toggle', () => {if(menu.open)menus.forEach(other => {if(other!==menu)other.open=false;});}));
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')menus.forEach(menu=>{if(menu.open){menu.open=false;menu.querySelector<HTMLElement>('summary')?.focus();}});});
+  document.addEventListener('click',event=>{if(!(event.target as Element).closest('.platform-item'))menus.forEach(menu=>menu.open=false);});
+</script>

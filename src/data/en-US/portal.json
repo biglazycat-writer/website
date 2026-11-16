@@ -1,0 +1,472 @@
+{
+  "nav": {
+    "ariaLabel": "Site navigation",
+    "menu": "Menu",
+    "features": "Features",
+    "download": "Download",
+    "purchase": "Purchase",
+    "themes": "Themes",
+    "tools": "Online Tools",
+    "wechat": "WeChat",
+    "canvas": "Canvas",
+    "mindmap": "Mind Map",
+    "pdf": "PDF",
+    "bookstore": "Bookstore",
+    "help": "Help"
+  },
+  "actions": {
+    "enterWorkbench": "Open Workbench",
+    "enterWorkbenchTitle": "Open Workbench · {{username}}",
+    "workbench": "Workbench",
+    "login": "Sign in",
+    "register": "Sign up",
+    "registerFree": "Sign up free"
+  },
+  "language": {
+    "switch": "Switch language"
+  },
+  "footer": {
+    "sectionProduct": "Products",
+    "sectionStart": "Get started",
+    "sectionContact": "Contact us",
+    "onlineBookstore": "Online Bookstore",
+    "features": "Features",
+    "desktopLicense": "Desktop License",
+    "faq": "FAQ",
+    "email": "Email: biglazycatwriter@163.com",
+    "copyright": "© {{year}} 大懒猫创作平台 · Buy once, create with ease"
+  },
+  "cta": {
+    "startExperience": "Get started",
+    "buyLicense": "Buy lifetime license"
+  },
+  "art": {},
+  "features": {
+    "hero": {
+      "sloganLead": "In the age of AI, ",
+      "sloganEm": "own your creative assets.",
+      "desc": "Pick a topic, think it through, build it up, share it out — the 大懒猫 creator workspace grows every spark into finished work.",
+      "badges": "Local-first · AI-first · Git-first",
+      "alt": "大懒猫 desktop chapter editor formatting an article with text and imagery",
+      "altMobile": "大懒猫 mobile reader leaning against the desktop screen, showing the same work",
+      "scrollHint": "Scroll down for more"
+    },
+    "title": "The right tool for every step",
+    "subtitle": "From writing and organizing to canvas, mind maps and AI — every core feature gets its own tour, shown with real screens.",
+    "shots": {
+      "dual": {
+        "title": "Write left, research right",
+        "desc": "The built-in browser opens multiple tabs beside your draft; image-grab and article-clipping extensions ship built in — save any page into your library in one click and keep writing.",
+        "alt": "大懒猫 desktop dual-pane mode: editor on the left, built-in browser with multiple tabs on the right"
+      },
+      "pdf": {
+        "title": "Read here, annotate there",
+        "desc": "A local PDF library with full-text search, AI summaries, full-page translation and side-by-side notes — your annotations land right where you read.",
+        "alt": "大懒猫 desktop PDF reader with outline sidebar, reading an article about coffee and sleep"
+      },
+      "mindmap": {
+        "title": "Outlines grow into mind maps",
+        "desc": "Outlines grow into mind maps in one click, with node styles, icons and relation lines; reading notes become a visible map you can keep pruning.",
+        "alt": "大懒猫 desktop mind map on reading methods with four branches"
+      },
+      "canvas": {
+        "title": "Every diagram, one canvas",
+        "desc": "A rich component library, AI image generation and editing on the canvas, customizable node styles and connectors — architecture, flowcharts or plot lines, all on one canvas.",
+        "alt": "大懒猫 desktop structured canvas of an e-commerce microservice architecture"
+      }
+    },
+    "caps": {
+      "localfirst": {
+        "title": "Local-first files",
+        "desc": "Your work lives as plain files on your own computer — private, secure and writable offline; no lock-in, no proprietary formats. Switch devices or tools and the folder comes with you."
+      },
+      "ai": {
+        "title": "AI-first",
+        "desc": "Reuse the Codex and Claude CLIs already installed on your machine, or configure your own API endpoints in the app; continue, rewrite, polish and search your whole library with AI always at hand."
+      },
+      "vim": {
+        "title": "VIM mode",
+        "desc": "Pure keyboard control with VIM keybindings — hands never leave the home row; pair it with flow mode and the pomodoro timer for deep-focus writing."
+      },
+      "platforms": {
+        "title": "Every platform",
+        "desc": "Windows, macOS, Linux and Android — at the office, at home or on the commute, pick up exactly where you left off."
+      },
+      "markdown": {
+        "title": "Markdown WYSIWYG",
+        "desc": "What you type is the final layout, with a source-code mode for side-by-side comparison; tables, code highlighting, formulas, images and multiple tabs are all there."
+      },
+      "outline": {
+        "title": "Outlines & annotations",
+        "desc": "The outline panel gives you the whole volume and chapter structure with batch re-leveling; jot annotations beside paragraphs so revision clues never get lost."
+      },
+      "flow": {
+        "title": "Flow-mode immersive writing",
+        "desc": "A paragraph-by-paragraph writing flow, with a pomodoro timer and typing aids, helps long-form authors actually finish the book, day by day."
+      },
+      "mindmap": {
+        "title": "Mind map",
+        "desc": "Grow outlines into maps in one click, with node styles and outline import, saved as real files on your disk."
+      },
+      "canvas": {
+        "title": "Structured canvas",
+        "desc": "Lay out ideas with nodes and connections, attach canvases to chapters, and let AI restyle the canvas on command."
+      },
+      "bilink": {
+        "title": "Bidirectional links",
+        "desc": "Type [[ to link chapters and materials; backlinks collect automatically, weaving characters, foreshadowing and ideas into one web."
+      },
+      "tags": {
+        "title": "Tag system",
+        "desc": "Tag content, images and prompts, merge similar tags and clean up unused ones, and click any tag to see everything related."
+      },
+      "search": {
+        "title": "Global search",
+        "desc": "One search across works, chapters, PDFs, images, mind maps, canvases and prompts; jump straight to the hit with highlighting."
+      },
+      "pdf": {
+        "title": "PDF reading",
+        "desc": "A local PDF library with full-text search and annotations, AI summary assisted reading and full-page translation."
+      },
+      "image": {
+        "title": "AI image workbench",
+        "desc": "Prompt templates and size-ratio presets, an async task queue, and finished images filed automatically for instant use."
+      },
+      "browser": {
+        "title": "Built-in browser & web clipper",
+        "desc": "Look things up in the built-in browser and clip web articles into Markdown in one click, with images saved locally."
+      },
+      "wechat": {
+        "title": "WeChat formatting & publishing",
+        "desc": "Format with one-click themes, upload body images and covers automatically, and deliver drafts straight to your WeChat account."
+      },
+      "book": {
+        "title": "Book making",
+        "desc": "Turn a collection into a book: EPUB e-book, Word manuscript or print-ready PDF, with cover, TOC and volume splits."
+      },
+      "multiwindow": {
+        "title": "Multi-window, multi-screen",
+        "desc": "Drag tabs into standalone windows on another display and split the main window side by side — write, research and sketch at once."
+      },
+      "mcp": {
+        "title": "MCP & external AI",
+        "desc": "A built-in MCP server callable by external AI clients such as Codex and Claude, plus external MCP tools to extend your workflow."
+      },
+      "plugins": {
+        "title": "Plugin platform",
+        "desc": "An open plugin system: standalone pages, commands, custom file editors and scheduled tasks can all come from plugins; the official SDK and template repo work out of the box, with the full guide under \"Plugin development\" in the Help Center."
+      },
+      "export": {
+        "title": "Export & sync",
+        "desc": "Export to EPUB / PDF / DOCX at will; WebDAV / S3 / Git keep multiple devices in sync."
+      }
+    }
+  },
+  "desktop": {
+    "wantTitle": "Want 大懒猫 Creator?",
+    "downloadHint": "Every package ships with both a GitHub and a Gitee download — both addresses always work; the order below simply recommends the faster source for your network.",
+    "trialNote": "Free 30-day full-feature trial · one code per machine, migratable",
+    "priceNote": "One-time purchase, use forever, updates included",
+    "platformWindows": "Windows",
+    "platformMacos": "macOS",
+    "platformAndroid": "Android",
+    "platformLinux": "Linux",
+    "channelTitle": "Official release channels",
+    "channelHint": "Every version and checksum, permanently available",
+    "channelGithub": "GitHub releases",
+    "channelGitee": "Gitee releases",
+    "recommended": "Your system · recommended",
+    "optionRecommended": "Recommended",
+    "platformDownloadLabel": "Download {{name}}: {{option}}",
+    "menuLabel": "All {{name}} packages",
+    "menuEmptyHint": "No packages listed for this platform yet — download via the official release channels.",
+    "optionLabel": "{{kind}}{{versionLabel}} · {{source}}",
+    "kindInstaller": "Installer build",
+    "kindPortable": "Portable build",
+    "kindIntel": "Intel build",
+    "kindAppleSilicon": "Apple silicon build",
+    "kindDmg": "Universal build",
+    "kindDeb": "deb package",
+    "kindAppImage": "AppImage package",
+    "kindRpm": "rpm package",
+    "kindApk": "APK package",
+    "kindPackage": "Installer",
+    "kindCustom": "Official installer",
+    "sourceGithub": "GitHub download",
+    "sourceGitee": "Gitee download",
+    "sourceCustom": "Official download",
+    "openGithub": "Open GitHub releases",
+    "openGitee": "Open Gitee releases"
+  },
+  "themes": {
+    "titleLead": "Rich themes, ",
+    "titleEm": "typographic voice in one click.",
+    "desc": "From Chinese-paper heritage to dark tech, every theme is a complete typography system — fonts, rhythm and section ornaments pre-tuned and ready to apply.",
+    "aiNote": "None of them feels right? Describe the mood and let AI tailor a theme of your own.",
+    "previewTitle": "Preview sheet of the {{name}} theme"
+  },
+  "faq": {
+    "title": "Still have questions?",
+    "subtitle": "Common questions about desktop licensing, AI setup and local files.",
+    "items": {
+      "q1": "What kinds of creators is 大懒猫创作平台 for?",
+      "a1": "BigLazyCat Creator brings writing, research materials, AI, mind maps and canvas into one desktop workspace for novelists and content creators.",
+      "q2": "Who owns the copyright of AI-generated content?",
+      "a2": "Content generated with 大懒猫创作平台 and then edited and assembled by you belongs to you. 大懒猫创作平台 is only a creative assistant and makes no claim over your copyright.",
+      "q3": "Which AI models are supported? Do they cost extra?",
+      "a3": "GLM, DeepSeek, Gemini, OpenAI and other mainstream models are supported out of the box, and any OpenAI-compatible endpoint works too. Model requests go straight to the provider you configure — no proxying, no revenue share, no markup.",
+      "q4": "Is there only one edition of the desktop app?",
+      "a4": "Yes. The desktop edition has a single tier: one-time purchase, own it forever. No subscription, no free-versus-pro levels — writing, AI, formatting, publishing, canvas and mind maps are all yours after purchase, with future version updates included.",
+      "q5": "Does the 30-day trial need an activation code? What happens when it ends?",
+      "a5": "No activation code needed — download the desktop edition and the 30-day full-feature trial starts right away. After it ends the app becomes read-only while your works and data stay untouched; full features return the moment you buy an activation code.",
+      "q6": "Does the website receive my work?",
+      "a6": "This website provides product information, downloads and documentation. Your desktop files stay on your device. When you use AI, relevant content is sent to the model service you configure.",
+      "q7": "Which devices are supported?",
+      "a7": "The desktop app supports Windows, macOS and Linux; an Android app is also available. See the official release pages for currently published packages.",
+      "q8": "Can I use my own AI models?",
+      "a8": "Yes. Configure a compatible endpoint, model name and API key in the desktop app, or use locally installed Codex or Claude commands. The help center explains setup.",
+      "q9": "Does the desktop app support plugins? Where do I start building my own?",
+      "a9": "Yes. The desktop app ships a plugin center and a plugin runtime: plugins can provide standalone pages, commands, menu entries, custom file editors and scheduled tasks — the official WeChat publishing and typeset-export features are themselves plugins. Developers should start with the \"Plugin development\" section in the Help Center, which walks through creating a project from the template, writing the manifest, the SDK surface, and packaging & installation."
+    }
+  },
+  "bookstore": {
+    "navLabel": "Bookstore navigation",
+    "nav": {
+      "home": "Bookstore",
+      "rankings": "Rankings",
+      "explore": "Categories"
+    },
+    "searchPlaceholder": "Search title / author",
+    "searchAria": "Search",
+    "footer": {
+      "home": "大懒猫创作平台 home",
+      "bookstore": "Bookstore",
+      "workbench": "Creation workbench",
+      "tagline": "Online bookstore · Discover published works"
+    },
+    "errorFallback": "Load failed",
+    "more": "More",
+    "cover": {
+      "anonymous": "Anonymous author",
+      "fallbackGlyph": "B"
+    },
+    "home": {
+      "title": "Online Bookstore",
+      "empty": "No published works yet. Authors can tick \"Publish to bookstore\" when releasing a work.",
+      "goCreate": "Start creating",
+      "sectionHot": "Popular works",
+      "sectionLatest": "Latest additions",
+      "sectionCompleted": "Completed picks"
+    },
+    "explore": {
+      "title": "Browse by category",
+      "all": "All",
+      "sortAria": "Sort by",
+      "searchSummary": "Search \"{{q}}\" · {{total}} works in total",
+      "empty": "No works match your filters — try another keyword or genre.",
+      "prevPage": "Previous",
+      "nextPage": "Next"
+    },
+    "sorts": {
+      "latest": "Latest",
+      "hot": "Hottest",
+      "new": "Just added",
+      "completed": "Completed"
+    },
+    "tabs": {
+      "hot": "Popular",
+      "new": "New releases",
+      "completed": "Completed"
+    },
+    "rankings": {
+      "title": "Rankings",
+      "empty": "Nothing on the charts yet",
+      "readCount": "{{count}} reads"
+    },
+    "detail": {
+      "missingToken": "Missing book identifier",
+      "notFound": "Book not found or not published",
+      "back": "Back to bookstore",
+      "lockedTag": "Some content needs unlocking",
+      "chapters": "{{count}} chapters",
+      "reads": "{{count}} reads",
+      "startRead": "Start reading",
+      "unlockTitle": "Enter unlock code",
+      "unlockDesc": "This book is protected by a full-book unlock code; once verified you will go straight to reading with all content unlocked.",
+      "unlockPlaceholder": "Enter unlock code",
+      "unlockRequired": "Please enter the unlock code",
+      "unlockWrong": "Incorrect unlock code",
+      "unlockSubmit": "Unlock and read",
+      "verifying": "Verifying..."
+    }
+  },
+  "tools": {
+    "brand": "大懒猫创作平台",
+    "backToPortalTitle": "Back to the 大懒猫创作平台 portal",
+    "kind": {
+      "wechat": "WeChat Formatting",
+      "ppt": "Online PPT",
+      "canvas": "Online Canvas",
+      "mindmap": "Online Mind Map",
+      "pdf": "PDF Reader"
+    },
+    "model": {
+      "title": "Model config",
+      "notice": "Settings are stored on this device. The portal never provides or reads platform backend API keys. If the endpoint does not allow direct calls from a web page, requests are transparently forwarded through this site's server; your API key then passes through our server for that single forwarding only and is never stored or logged.",
+      "chatLegend": "Text model (used for PPT, mind maps, canvas and articles)",
+      "imageLegend": "Image model (optional, the vision model used to extract PDF text; also a chat endpoint)",
+      "endpointPlaceholder": "Endpoint URL, e.g. https://api.example.com/v1/chat/completions",
+      "chatEndpointAria": "Text model endpoint URL",
+      "modelNamePlaceholder": "Model name, e.g. gpt-4o-mini",
+      "chatModelAria": "Text model name",
+      "apiKeyPlaceholder": "Your API key (stored on this device only)",
+      "chatApiKeyAria": "Text model API key",
+      "imageEndpointPlaceholder": "Endpoint URL, e.g. https://api.example.com/v1",
+      "imageEndpointAria": "Image model endpoint URL",
+      "imageModelPlaceholder": "Vision model name, e.g. gpt-4o-mini",
+      "imageModelAria": "Image model name",
+      "imageApiKeyPlaceholder": "Your image API key (optional)",
+      "imageApiKeyAria": "Image model API key",
+      "checkHealth": "Endpoint health check",
+      "discoverModels": "Discover available models",
+      "healthOk": "Endpoint available",
+      "healthError": "Check failed",
+      "healthErrorUnknown": "Check failed for an unknown reason",
+      "discoverFailed": "Could not fetch the models supported by this endpoint",
+      "status": "Text model: {{chat}} · Image model: {{image}}",
+      "notConfigured": "Not configured",
+      "done": "Done"
+    },
+    "toolbar": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "strike": "Strikethrough",
+      "inlineCode": "Inline code",
+      "h1": "Heading 1",
+      "h2": "Heading 2",
+      "h3": "Heading 3",
+      "ul": "Bullet list",
+      "ol": "Numbered list",
+      "quote": "Quote",
+      "codeBlock": "Code block",
+      "hr": "Divider",
+      "link": "Insert link",
+      "image": "Insert image",
+      "boldPlaceholder": "bold text",
+      "italicPlaceholder": "italic text",
+      "strikePlaceholder": "struck text",
+      "codePlaceholder": "code"
+    },
+    "wechat": {
+      "untitledTitle": "Untitled article",
+      "defaultMarkdown": "## Start writing your article\n\nThe left side is the Markdown source and the right side is a live formatting preview. When you are done, open the formatting panel on the right to pick a theme, then copy the result into the WeChat editor.\n\n- **Bold**, *italic*, `inline code`\n- Headings, lists, quotes, code blocks and images are all written directly in Markdown\n\n> Quote something you want to emphasize.\n",
+      "titleAria": "Article title",
+      "markdownAria": "Markdown source",
+      "linkPrompt": "Enter link URL",
+      "linkTextPlaceholder": "link text",
+      "aiPolish": "AI polish",
+      "openPanel": "Open formatting panel",
+      "outline": "Outline",
+      "outlineEmpty": "No headings yet — start with # to outline your article",
+      "needChatModel": "Pick a text model in the AI model panel at the top first",
+      "polishDone": "Polished result written into the Markdown source"
+    },
+    "ai": {
+      "emptyResponse": "The model returned no content",
+      "requestFailed": "Model request failed"
+    },
+    "resource": {
+      "pptTitle": "My presentation",
+      "canvasTitle": "My structured canvas",
+      "mindmapTitle": "My mind map"
+    },
+    "canvas": {
+      "defaultLayer": "Default layer",
+      "versionMissing": "Local version not found"
+    },
+    "pdf": {
+      "defaultTitle": "Local PDF",
+      "localHint": "Files are kept in your browser's local storage",
+      "open": "Open PDF",
+      "clear": "Clear local document",
+      "chooseFile": "Choose file",
+      "emptyTitle": "Open a PDF document",
+      "emptyDesc": "Open large PDFs directly — your document stays in your browser and is never uploaded.",
+      "notLoaded": "PDF not loaded yet",
+      "canvasError": "OCR failed to initialize. Please try again.",
+      "ocrCurrentPage": "OCR current page",
+      "ocrClose": "Close OCR side-by-side",
+      "ocrDone": "Page {{page}} OCR complete",
+      "ocrFailed": "OCR failed",
+      "ocrPageHeader": "OCR text · Page {{page}}",
+      "translateLangAria": "Full-text translation target language",
+      "translateToZh": "Translate to Chinese",
+      "translateToEn": "Translate to English",
+      "translateAll": "Translate whole document",
+      "translateClose": "Close translation side-by-side",
+      "translateDone": "Full-document translation finished",
+      "translateFailed": "Full-document translation failed",
+      "translatedPageHeader": "Translation · Page {{page}}",
+      "hideSidebar": "Hide sidebar",
+      "showSidebar": "Show sidebar",
+      "pageAria": "Current page",
+      "zoomOut": "Zoom out",
+      "zoomIn": "Zoom in",
+      "search": "Search",
+      "searchPlaceholder": "Search document content",
+      "searchFound": "Found on {{count}} pages",
+      "searchHint": "Type a keyword to start searching",
+      "searchResults": "Search results",
+      "aiSummarize": "AI summary of this page",
+      "aiExplain": "AI explain selection",
+      "aiSummaryTitle": "AI page summary",
+      "aiSummarizeFailed": "PDF AI summary failed",
+      "aiExplainFailed": "PDF AI explanation failed",
+      "noTextOnPage": "No extractable text on this page",
+      "needChatModel": "Fill in a text model in the AI model panel at the top first",
+      "addAnnotation": "Add annotation",
+      "annotationPlaceholder": "Write your thoughts (leave empty to only highlight)",
+      "highlightOnly": "Highlight only",
+      "saveAnnotation": "Save annotation",
+      "toc": "Contents",
+      "noToc": "This document has no embedded outline",
+      "annotations": "Annotations",
+      "highlightLabel": "Highlight",
+      "pageNumber": "Page {{page}}",
+      "pagePairAria": "Page {{page}} side-by-side",
+      "loading": "Loading {{title}}…",
+      "viewRead": "Read",
+      "viewEdit": "Edit",
+      "viewOrganize": "Organize",
+      "undo": "Undo",
+      "redo": "Redo",
+      "saveLocal": "Save locally",
+      "tools": "Tools",
+      "selectPagesFirst": "Select pages in the organize view first",
+      "editSessionFailed": "Failed to load document editing. Please try again.",
+      "editEngineFailed": "Failed to initialize document editing. Please try again.",
+      "opFailed": "Operation failed",
+      "savedLocally": "Saved to this device",
+      "saveFailed": "Save failed",
+      "opRotate": "Rotate {{pages}} {{dir}}",
+      "opDuplicate": "Duplicate {{pages}}",
+      "opDelete": "Delete {{pages}}",
+      "opInsertBlank": "Insert blank page",
+      "opInsertImage": "Insert image page",
+      "opMerge": "Merge {{name}}",
+      "opEditText": "Edit text",
+      "opReplaceImage": "Replace image",
+      "opDeleteObject": "Delete {{kind}}",
+      "opRedact": "Redact",
+      "opErase": "White-out",
+      "opReorder": "Reorder pages",
+      "opAddText": "Add text",
+      "opAddPageNumbers": "Add page numbers",
+      "opAddWatermark": "Add watermark",
+      "redactBlock": "Redact",
+      "redactErase": "White-out",
+      "prevPage": "Previous page",
+      "nextPage": "Next page"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+---
+import Help from '../../components/Help.astro';
+---
+<Help />
+<script>
+  const match=location.hash.match(/^#\/?([\w-]+)\/([\w-]+)$/);
+  if(match) location.replace(`${import.meta.env.BASE_URL}help/${match[1]}/${match[2]}/`);
+</script>
