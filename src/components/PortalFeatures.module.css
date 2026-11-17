@@ -41,8 +41,11 @@
   letter-spacing: -0.02em;
   color: var(--portal-text);
   margin: 0 0 14px;
-  text-wrap: balance;
+  text-wrap: pretty;
+  max-width: 900px;
 }
+
+.heroTitle em { display: block; }
 
 .heroTitle em {
   font-style: normal;
