@@ -48,8 +48,8 @@ const graph = [
       <a class="brand" href={home}><img src={`${base}/logo.png`} width="36" height="36" alt="" />{english ? 'BigLazyCat Creator' : '大懒猫创作平台'}</a>
       <nav aria-label={english ? 'Navigation' : '站点导航'}>
         <a href={`${home}#features`}>{english ? 'Features' : '特色'}</a>
-        <a href={`${home}download/`}>{english ? 'Download' : '下载'}</a>
-        <a href={`${home}pricing/`}>{english ? 'License' : '购买'}</a>
+        <a href={`${home}#download`}>{english ? 'Download' : '下载'}</a>
+        <a href={`${home}#purchase`}>{english ? 'License' : '购买'}</a>
         <a href={help}>{english ? 'Help' : '帮助'}</a>
         <a href={noindex ? `${base}/${english ? '' : 'en/'}` : new URL(english ? urls.zh : urls.en).pathname}>{english ? '中文' : 'English'}</a>
       </nav>
