@@ -18,13 +18,15 @@ const structuredData=[softwareSchema({site:Astro.site,base,language,description,
 }];
 ---
 <Layout language={language} structuredData={structuredData}>
+  <noscript><style is:global>[style*="opacity:0"]{opacity:1!important;transform:none!important;filter:none!important}</style></noscript>
   <Features language={language} client:load />
   <section class="product-intro">
-    <h2>{english ? 'A local-first workspace for writing and research' : '本地优先的 AI 写作与小说创作软件'}</h2>
+    <h2>{english ? 'A local-first workspace for writing and research' : '本地优先的 AI 写作软件'}</h2>
     <p>{english ? 'BigLazyCat Creator combines Markdown writing, linked notes, AI assistance and research tools in one workspace. Plan chapters with mind maps, collect references in canvas and PDF views, and prepare articles and books for publishing. Your work stays in files on your own device.' : '大懒猫创作平台把 Markdown 写作、双向链接、AI 助手与资料管理放在同一个工作台。用思维导图梳理小说大纲，用画布整理人物与素材，阅读和批注 PDF，完成公众号排版与书籍制作。作品以文件保存在你自己的设备上，适合小说作者、公众号作者和知识创作者。'}</p>
     <p class="guide-links"><a href={`${base}${english?'en/':''}help/writing/editor/`}>{english?'Writing guide':'写作功能指南'}</a><a href={`${base}${english?'en/':''}help/quickstart/aiSetup/`}>{english?'Set up AI':'AI 模型配置'}</a><a href={`${base}${english?'en/':''}help/quickstart/download/`}>{english?'Installation guide':'下载与安装指南'}</a></p>
   </section>
   <DesktopOffer language={language} />
+  <p class="guide-links"><a href={`${base}${english?'en/':''}download/`}>{english?'Downloads and installation':'下载与安装'}</a><a href={`${base}${english?'en/':''}pricing/`}>{english?'Pricing and licensing':'价格与授权说明'}</a><a href={`${base}${english?'en/':''}faq/`}>{english?'Product FAQ':'产品常见问题'}</a></p>
   <section class="offer faq" id="faq"><h2>{copy.faq.title}</h2>{Array.from({length:9}, (_,i) => <details><summary>{(copy.faq.items as Record<string,string>)[`q${i+1}`]}</summary><p>{(copy.faq.items as Record<string,string>)[`a${i+1}`]}</p></details>)}</section>
 </Layout>
 <style>

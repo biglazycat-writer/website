@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DesktopOffer from './DesktopOffer.astro';
+import zh from '../data/zh-CN/portal.json';
+import en from '../data/en-US/portal.json';
+import purchase from '../data/purchase.json';
+import downloads from '../data/downloads.json';
+import {softwareSchema} from '../lib/seo.mjs';
+const {language='zh-CN',kind='faq'}=Astro.props;
+const english=language==='en-US';
+const copy=english?en:zh;
+const base=`${import.meta.env.BASE_URL}${english?'en/':''}`;
+const titles=english?{download:'Download BigLazyCat Creator',pricing:'Pricing and desktop licensing',faq:'BigLazyCat Creator: product FAQ'}:{download:'大懒猫创作平台官方下载与安装',pricing:'大懒猫创作平台价格与授权说明',faq:'大懒猫创作平台常见问题'};
+const descriptions=english?{download:'Download BigLazyCat Creator for Windows, macOS, Linux and Android. Choose the correct package and read the installation guide.',pricing:`Desktop license: ${purchase.price}. Read the trial, purchase and activation information before buying.`,faq:'Answers about local files, AI providers, the desktop trial, licensing and supported platforms.'}:{download:'下载大懒猫创作平台 Windows、macOS、Linux 与 Android 安装包，查看芯片架构选择、安装指南与官方发布渠道。',pricing:`大懒猫创作平台桌面版 ${purchase.price}，30 天全功能试用。查看买断授权、购买流程与激活说明。`,faq:'了解大懒猫创作平台的本地数据、AI 服务费用、30 天试用、桌面授权与支持平台。'};
+const pageKind=kind as keyof typeof titles;
+const description=descriptions[pageKind];
+const questions=Array.from({length:9},(_,i)=>({q:(copy.faq.items as Record<string,string>)[`q${i+1}`],a:(copy.faq.items as Record<string,string>)[`a${i+1}`]}));
+const structuredData=kind==='faq'?[{'@type':'FAQPage',mainEntity:questions.map(item=>({'@type':'Question',name:item.q,acceptedAnswer:{'@type':'Answer',text:item.a}}))}]:[softwareSchema({site:Astro.site,base:import.meta.env.BASE_URL,language,description,purchase,downloads})];
+---
+<Layout language={language} title={`${titles[pageKind]} | ${english?'BigLazyCat Creator':'大懒猫创作平台'}`} description={description} structuredData={structuredData}>
+  <article class="product-page">
+    <p class="eyebrow">{english?'Local-first AI writing software':'本地优先的 AI 写作软件'}</p>
+    <h1>{titles[pageKind]}</h1><p class="lead">{description}</p>
+    <nav aria-label={english?'Product information':'产品信息'}><a href={`${base}download/`}>{english?'Download':'下载与安装'}</a><a href={`${base}pricing/`}>{english?'Pricing':'价格与授权'}</a><a href={`${base}faq/`}>{english?'FAQ':'常见问题'}</a></nav>
+    {kind==='download' && <>
+      <h2>{english?'Choose your installation package':'如何选择安装包'}</h2>
+      <ul>
+        <li>Windows：{english?'Select the Windows installer.':'选择 Windows 安装版本。'}</li>
+        <li>macOS：{english?'Choose Apple Silicon (arm64) or Intel (amd64) to match your Mac.':'根据电脑芯片选择 Apple 芯片（arm64）或 Intel（amd64）版本。'}</li>
+        <li>Linux：{english?'Choose a deb package or AppImage for your distribution.':'根据发行版选择 deb 或 AppImage。'}</li>
+        <li>Android：{english?'Download the APK on your Android device.':'在 Android 设备上下载并安装 APK。'}</li>
+      </ul>
+      <p>{english?'Available packages are listed below. Check the release notes and installation guide before installing.':'当前可用版本以以下安装包列表为准。安装前请查看发布说明及安装指南。'}</p>
+      <p><a href={`${base}help/quickstart/download/`}>{english?'Desktop installation guide':'桌面端安装指南'}</a> · <a href={`${base}help/quickstart/mobileInstall/`}>{english?'Mobile installation guide':'移动端安装指南'}</a> · <a href={`${base}help/intro/changelog/`}>{english?'Release notes':'更新记录'}</a></p>
+      <p>{english?'Package version':'安装包版本'}：v{downloads.version} · {downloads.date}</p>
+    </>}
+    {kind==='pricing' && <>
+      <h2>{english?'One desktop edition':'桌面版只有一档'}</h2>
+      <p>{copy.desktop.priceNote}。{copy.desktop.trialNote}</p>
+      <h2>{english?'Try before purchasing':'先试用，再购买'}</h2>
+      <ol><li>{english?'Download the app and try it for 30 days without an activation code.':'下载软件，无需激活码即可开始 30 天全功能试用。'}</li><li>{english?'Confirm that it meets your needs, then use the official purchase link below.':'确认软件符合需要后，通过下方官方购买入口下单。'}</li><li>{english?'Follow the activation guide to enter your code in the app.':'根据激活指南，在软件中输入授权码完成激活。'}</li></ol>
+      <p>{purchase.description[english?'en-US':'zh-CN']}</p>
+      <h2>{english?'AI provider costs':'AI 服务费用'}</h2>
+      <p>{english?'The software license does not include a paid AI-provider quota. Configure your own model service; availability and billing depend on that provider.':'软件买断授权不包含付费 AI 服务商的调用额度。请配置自己的模型服务，是否收费及具体费用以对应服务商为准。'}</p>
+      <p><a href={`${base}help/quickstart/account/`}>{english?'Activation and account guide':'授权激活指南'}</a> · <a href={`${base}help/quickstart/aiSetup/`}>{english?'AI configuration guide':'AI 配置指南'}</a></p>
+    </>}
+    {kind==='faq' && <>{questions.map(item=><section><h2>{item.q}</h2><p>{item.a}</p></section>)}<p><a href={`${base}help/`}>{english?'Read the full documentation':'查看完整帮助文档'}</a></p></>}
+  </article>
+  {kind!=='faq' && <DesktopOffer language={language} />}
+</Layout>
+<style>
+  .product-page{max-width:900px;margin:auto;padding:64px 24px 80px}.eyebrow{font-size:14px;color:#61616a}h1{font-size:clamp(30px,5vw,46px);line-height:1.3;letter-spacing:-.02em}h2{font-size:24px;margin-top:38px}.lead{font-size:18px;color:#55555f}p,li{line-height:1.9;overflow-wrap:anywhere}li{margin:10px 0}nav{display:flex;flex-wrap:wrap;gap:20px;padding:20px 0;border-bottom:1px solid #ddd}a{text-underline-offset:4px}section{border-bottom:1px solid #ddd;padding-bottom:18px}
+</style>

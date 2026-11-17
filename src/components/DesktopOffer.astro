@@ -20,7 +20,7 @@ const names = {windows:'Windows',macos:'macOS',android:'Android',linux:'Linux'};
     <div id="purchase" class="purchase-info">
       <p class="trial-note">{copy.trialNote}</p>
       <p class="price-row">{purchase.price && <strong class="price">{purchase.price}</strong>}<span>{copy.priceNote}</span></p>
-      <a class="buy-button" href={purchase.url} target="_blank" rel="noopener noreferrer"><ShoppingCart size={16} />{purchase.buttonLabel[lang]}</a>
+      <a class="buy-button" href={purchase.url} data-event="purchase_click" target="_blank" rel="noopener noreferrer"><ShoppingCart size={16} />{purchase.buttonLabel[lang]}</a>
       <p class="purchase-note">{purchase.description[lang]}</p>
     </div>
     <p class="download-hint">{english ? 'Select a platform to download. Open “All packages” for other formats and architectures.' : '点击系统图标下载安装包，展开「全部版本」选择格式和芯片架构。'}</p>
@@ -29,10 +29,10 @@ const names = {windows:'Windows',macos:'macOS',android:'Android',linux:'Linux'};
         const options = assets.filter(asset => asset.platform === platform);
         const primary = options[0]?.url || downloads.fallbackUrl;
         return <div class="platform-item">
-          <a class="platform-main" href={primary} aria-label={`${english ? 'Download' : '下载'} ${names[platform]}`}><span class="badge"><PlatformLogo platform={platform} /></span><span class="platform-name">{names[platform]}</span></a>
+          <a class="platform-main" href={primary} data-event="download_click" data-platform={platform} aria-label={`${english ? 'Download' : '下载'} ${names[platform]}`}><span class="badge"><PlatformLogo platform={platform} /></span><span class="platform-name">{names[platform]}</span></a>
           {downloads.version && <span class="version">v{downloads.version}</span>}
           <details class="package-menu"><summary>{english ? 'All packages' : '全部版本'}<ChevronDown size={12} /></summary><div class="menu-panel" aria-label={`${names[platform]} ${english ? 'packages' : '安装包'}`}>
-            {options.length ? options.map(option => <a class="menu-item" href={option.url}><Download size={15} /><span><strong>{option.name}</strong><small>{english ? 'Version' : '版本'} {downloads.version}</small></span></a>) : <a class="menu-item" href={downloads.fallbackUrl}>{english ? 'Open release page' : '查看发布页'}</a>}
+            {options.length ? options.map(option => <a class="menu-item" href={option.url} data-event="download_click" data-platform={platform} data-package={option.name}><Download size={15} /><span><strong>{option.name}</strong><small>{english ? 'Version' : '版本'} {downloads.version}</small></span></a>) : <a class="menu-item" href={downloads.fallbackUrl}>{english ? 'Open release page' : '查看发布页'}</a>}
           </div></details>
         </div>;
       })}

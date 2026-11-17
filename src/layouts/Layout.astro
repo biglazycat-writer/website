@@ -3,6 +3,7 @@ import styles from '../components/PortalPage.module.css';
 import downloads from '../data/downloads.json';
 import seo from '../data/seo.json';
 import {pageUrls} from '../lib/seo.mjs';
+import Analytics from '../components/Analytics.astro';
 const { language = 'zh-CN', canonicalPath = Astro.url.pathname, noindex = false, structuredData = [] } = Astro.props;
 const english = language === 'en-US';
 const defaults = english ? seo['en-US'] : seo['zh-CN'];
@@ -47,16 +48,19 @@ const graph = [
       <a class="brand" href={home}><img src={`${base}/logo.png`} width="36" height="36" alt="" />{english ? 'BigLazyCat Creator' : '大懒猫创作平台'}</a>
       <nav aria-label={english ? 'Navigation' : '站点导航'}>
         <a href={`${home}#features`}>{english ? 'Features' : '特色'}</a>
-        <a href={`${home}#download`}>{english ? 'Download' : '下载'}</a>
-        <a href={`${home}#purchase`}>{english ? 'License' : '购买'}</a>
+        <a href={`${home}download/`}>{english ? 'Download' : '下载'}</a>
+        <a href={`${home}pricing/`}>{english ? 'License' : '购买'}</a>
         <a href={help}>{english ? 'Help' : '帮助'}</a>
         <a href={noindex ? `${base}/${english ? '' : 'en/'}` : new URL(english ? urls.zh : urls.en).pathname}>{english ? '中文' : 'English'}</a>
       </nav>
     </header>
     <main id="main"><slot /></main>
+    <div class="product-links"><a href={`${home}faq/`}>{english ? 'Product FAQ' : '产品常见问题'}</a><a href={`${home}help/intro/about/`}>{english ? 'About the product' : '关于产品'}</a><a href={`${home}help/intro/changelog/`}>{english ? 'Release notes' : '更新记录'}</a></div>
     <footer class="site-footer"><a href={help}>{english ? 'Documentation' : '使用帮助'}</a>{downloads.channels.map(channel => <a href={channel.url}>{channel.name}</a>)}<a href="mailto:biglazycatwriter@163.com">biglazycatwriter@163.com</a><p>© {new Date().getFullYear()} {english ? 'BigLazyCat Creator' : '大懒猫创作平台'}</p></footer>
+    <Analytics />
   </body>
 </html>
 <style is:global>
   *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}a{color:inherit}button{font:inherit}img{max-width:100%;height:auto}figure{margin:0}.site-header{position:sticky;top:0;z-index:100;background:rgba(242,242,240,.96);border-bottom:1px solid #e2e2e0;padding:18px max(24px,calc((100vw - 1280px)/2));display:flex;justify-content:space-between;gap:24px;align-items:center}.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;white-space:nowrap}nav{display:flex;flex-wrap:wrap;gap:22px;font-size:14px}nav a{text-decoration:none}nav a:hover{color:#2f4b7c}.site-footer{text-align:center;padding:54px 20px;border-top:1px solid #e2e2e0;font-size:14px;color:#6b6b70}.site-footer a{display:inline-block;margin:8px 12px}.skip{position:absolute;top:-100px}.skip:focus{top:8px;z-index:200;background:white;padding:12px}section[id]{scroll-margin-top:100px}@media(max-width:800px){.site-header{flex-direction:column;gap:14px;padding:12px 16px}nav{gap:16px;font-size:13px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
+<style>.product-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding:24px;font-size:14px}</style>

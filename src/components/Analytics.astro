@@ -1,0 +1,17 @@
+---
+import config from '../data/analytics.json';
+const ga = /^G-[A-Z0-9]+$/.test(config.ga4MeasurementId) ? config.ga4MeasurementId : '';
+const token = /^[a-f0-9]{32}$/i.test(config.cloudflareToken) ? config.cloudflareToken : '';
+---
+{ga && <><script async src={`https://www.googletagmanager.com/gtag/js?id=${ga}`}></script><script is:inline define:vars={{ga}}>window.dataLayer=window.dataLayer||[];window.gtag=function(){window.dataLayer.push(arguments)};window.gtag('js',new Date());window.gtag('config',ga);</script></>}
+{token && <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({token})}></script>}
+<script>
+  document.addEventListener('click', event => {
+    const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[data-event]') : null;
+    if (!link) return;
+    const detail = {event:link.dataset.event,platform:link.dataset.platform || '',package:link.dataset.package || '',page_path:location.pathname};
+    const analyticsWindow = window as Window & {gtag?:(...args:unknown[])=>void};
+    analyticsWindow.gtag?.('event',detail.event,{platform:detail.platform,package_name:detail.package,page_path:detail.page_path,transport_type:'beacon'});
+    window.dispatchEvent(new CustomEvent('portal:conversion',{detail}));
+  });
+</script>
