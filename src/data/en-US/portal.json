@@ -43,7 +43,7 @@
   "art": {},
   "features": {
     "hero": {
-      "sloganLead": "BigLazyCat Creator: ",
+    "sloganLead": "BigLazyCat Creator ",
       "sloganEm": "local-first AI writing software",
       "desc": "Pick a topic, think it through, build it up, share it out — the 大懒猫 creator workspace grows every spark into finished work.",
       "badges": "Local-first · AI-first · Git-first",

@@ -42,10 +42,10 @@
   color: var(--portal-text);
   margin: 0 0 14px;
   text-wrap: pretty;
-  max-width: 900px;
+  max-width: 1200px;
 }
 
-.heroTitle em { display: block; }
+.heroTitle em { display: inline; }
 
 .heroTitle em {
   font-style: normal;
