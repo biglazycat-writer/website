@@ -13,8 +13,8 @@ assert.equal(new Set(locations).size,locations.length);
 assert.ok(!locations.some(url=>url.includes('404')||url.includes('#')));
 for(const location of locations){const url=new URL(location);assert.equal(url.origin,new URL(site).origin);await access(path.join(root,url.pathname.slice(base.length),'index.html'));}
 const html=[];
-const verificationFile=path.join(root,'baidu_verify_codeva-aSHyDHktmq.html');
-async function walk(dir){for(const entry of await readdir(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())await walk(file);else if(file.endsWith('.html')&&file!==verificationFile)html.push(file);}}
+const verificationFiles=new Set(['baidu_verify_codeva-aSHyDHktmq.html','baidu_verify_codeva-To3SQTmvFq.html'].map(name=>path.join(root,name)));
+async function walk(dir){for(const entry of await readdir(dir,{withFileTypes:true})){const file=path.join(dir,entry.name);if(entry.isDirectory())await walk(file);else if(file.endsWith('.html')&&!verificationFiles.has(file))html.push(file);}}
 await walk(root);
 for(const file of html){const content=await readFile(file,'utf8');assert.match(content,/<meta name="description" content="[^"]+"/);assert.match(content,/<link rel="canonical" href="https:\/\//);const schema=content.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);assert.ok(schema,`Missing schema: ${file}`);assert.ok(JSON.parse(schema[1])['@graph'].length>=3);if(file.endsWith('404.html'))assert.match(content,/noindex, follow/);else assert.match(content,/hreflang="x-default"/);}
 const home=await readFile(path.join(root,'index.html'),'utf8');
