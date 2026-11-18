@@ -22,4 +22,6 @@ GitHub 仓库 Settings → Pages → Source 选择 **GitHub Actions**，推送 `
 
 接入域名与缓存的步骤见 [部署指南](docs/deployment.md)，迁移边界与实施计划见 [实施计划](docs/implementation-plan.md)。
 
+插件展示与桌面端商店共用 `src/data/plugins.json`；更新版本、配置多个下载来源和构建官网镜像见 [插件目录指南](docs/plugin-catalog.md)。构建前自动下载并校验插件镜像，也可单独运行 `npm run prepare:plugins`。
+
 标题与搜索描述在 `src/data/seo.json`，页面自动生成结构化数据、双语链接、站点地图和 robots.txt；上线后的收录步骤见 [SEO 指南](docs/seo.md)。

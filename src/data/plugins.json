@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-11-18T00:00:00Z",
+  "plugins": [
+    {
+      "id": "blc-plugin-publish",
+      "name": "微信公众号发布",
+      "nameEn": "WeChat publishing",
+      "description": "从一篇好文章，到一份好看的公众号图文。排版、处理图片，再送进公众号草稿箱。",
+      "descriptionEn": "Give your writing a home on WeChat. Style your article, prepare images and send it to your official account’s draft box.",
+      "author": "大懒猫创作平台",
+      "category": "publishing",
+      "icon": "publish",
+      "features": ["10 套排版主题", "图片与封面处理", "公众号草稿发布"],
+      "featuresEn": ["10 editorial themes", "Images & covers", "Official account drafts"],
+      "homepage": "https://github.com/biglazycat-writer/blc-plugin-publish",
+      "releases": [
+        {
+          "version": "0.2.2",
+          "minimumClientVersion": "0.4.5",
+          "apiVersion": 1,
+          "minimumApiRevision": 3,
+          "platforms": ["windows/amd64", "windows/arm64", "darwin/amd64", "darwin/arm64", "linux/amd64", "linux/arm64"],
+          "size": 1230629,
+          "sha256": "9370fe2e1136784fac054e18385b8ddef743d17d14c9c3c034a787f5bf642f71",
+          "downloads": [
+            {"id": "official", "name": "官网", "nameEn": "Official mirror", "url": "https://biglazycatwriter.top/plugins/packages/blc-plugin-publish-0.2.2.tgz"},
+            {"id": "github", "name": "GitHub", "nameEn": "GitHub", "url": "https://github.com/biglazycat-writer/blc-plugin-publish/releases/download/v0.2.2/blc-plugin-publish-0.2.2.tgz"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blc-export-book",
+      "name": "排版导出",
+      "nameEn": "Typeset & export",
+      "description": "让文字拥有成品的样子。把文章变成长图，把一个文件夹变成一本书。",
+      "descriptionEn": "Make something you can hold on to. Turn an article into a designed page, or a folder of chapters into a book.",
+      "author": "大懒猫创作平台",
+      "category": "export",
+      "icon": "book",
+      "features": ["PDF · Word · EPUB", "长图与海报", "内置离线字体与排版引擎"],
+      "featuresEn": ["PDF · Word · EPUB", "Posters & images", "Offline fonts & typesetting"],
+      "homepage": "https://github.com/biglazycat-writer/blc-export-book",
+      "releases": [
+        {
+          "version": "0.1.3",
+          "minimumClientVersion": "0.4.5",
+          "apiVersion": 1,
+          "minimumApiRevision": 3,
+          "platforms": ["windows/amd64", "windows/arm64", "darwin/amd64", "darwin/arm64", "linux/amd64", "linux/arm64"],
+          "size": 59159199,
+          "sha256": "4f579d1f7fa3f650211194f775bebfec9f7a2e8766c13a4344e2e744b7f20a41",
+          "downloads": [
+            {"id": "official", "name": "官网", "nameEn": "Official mirror", "url": "https://biglazycatwriter.top/plugins/packages/blc-export-book-0.1.3.tgz"},
+            {"id": "github", "name": "GitHub", "nameEn": "GitHub", "url": "https://github.com/biglazycat-writer/blc-export-book/releases/download/v0.1.3/blc-export-book-0.1.3.tgz"}
+          ]
+        }
+      ]
+    }
+  ]
+}

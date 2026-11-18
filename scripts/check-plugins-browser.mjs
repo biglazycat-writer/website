@@ -1,0 +1,50 @@
+import {createServer} from 'node:http';
+import {spawn} from 'node:child_process';
+import {mkdir,mkdtemp,readFile,writeFile,stat} from 'node:fs/promises';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {once} from 'node:events';
+const output=path.resolve('.cache/plugin-browser');
+await mkdir(output,{recursive:true});
+const root=path.resolve('dist');
+const server=createServer(async(req,res)=>{try{const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);let file=path.resolve(root,'.'+pathname);if(!file.startsWith(root+path.sep)&&file!==root)throw Error('Bad path');if((await stat(file)).isDirectory())file=path.join(file,'index.html');res.setHeader('Content-Type',({'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.webp':'image/webp','.ico':'image/x-icon'}[path.extname(file)]||'application/octet-stream'));res.end(await readFile(file));}catch{res.writeHead(404);res.end('Not found');}});
+server.listen(0,'127.0.0.1');await once(server,'listening');
+const port=server.address().port;
+const profile=await mkdtemp(path.join(output,'profile-'));
+const browser=spawn(process.env.BLC_BROWSER||'C:/Program Files/Google/Chrome/Application/chrome.exe',['--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check','--remote-debugging-port=0',`--user-data-dir=${profile}`,'about:blank'],{windowsHide:true,stdio:['ignore','ignore','pipe']});
+let socket;
+let browserLog='';
+browser.stderr.on('data',data=>{browserLog=(browserLog+data).slice(-4000);});
+try{
+ const endpoint=await new Promise((resolve,reject)=>{let text='';const timer=setTimeout(()=>reject(Error('Browser startup timeout')),15000);browser.once('error',reject);browser.stderr.on('data',data=>{text+=data;const match=/DevTools listening on (ws:\/\/\S+)/.exec(text);if(match){clearTimeout(timer);resolve(match[1]);}});});
+ const page=await(await fetch('http://'+new URL(endpoint).host+'/json/new?about:blank',{method:'PUT'})).json();
+ socket=new WebSocket(page.webSocketDebuggerUrl);await new Promise((resolve,reject)=>{socket.onopen=resolve;socket.onerror=reject;});
+ console.log('Connected to plugin preview browser:',page.url);
+ let sequence=0;const pending=new Map(),errors=[];
+ socket.onclose=event=>{for(const request of pending.values())request.reject(Error(`Preview browser disconnected (${event.code}). ${browserLog}`));pending.clear();};
+ socket.onmessage=event=>{const value=JSON.parse(event.data);if(value.method==='Inspector.targetCrashed')console.error('Preview browser target crashed');if(value.method==='Runtime.exceptionThrown')errors.push(value.params.exceptionDetails.exception?.description||value.params.exceptionDetails.text);const request=pending.get(value.id);if(!request)return;pending.delete(value.id);if(value.error)request.reject(Error(value.error.message));else request.resolve(value.result);};
+ const send=(method,params={})=>new Promise((resolve,reject)=>{const id=++sequence;const timer=setTimeout(()=>{pending.delete(id);reject(Error('CDP timeout: '+method));},20000);pending.set(id,{resolve:value=>{clearTimeout(timer);resolve(value);},reject:error=>{clearTimeout(timer);reject(error);}});socket.send(JSON.stringify({id,method,params}));});
+ const evaluate=async expression=>{const result=await send('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(result.exceptionDetails)throw Error(result.exceptionDetails.text);return result.result.value;};
+ const waitFor=async expression=>{const deadline=Date.now()+15000;while(Date.now()<deadline){if(await evaluate(expression))return;await new Promise(resolve=>setTimeout(resolve,100));}throw Error('Page condition failed: '+expression);};
+ await send('Page.enable');await send('Runtime.enable');
+ for(const [width,height,locale] of [[1280,1000,''],[390,844,''],[1280,900,'en/']]){
+  await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<600});
+  await send('Page.navigate',{url:`http://127.0.0.1:${port}/${locale}plugins/`});
+  await waitFor("document.querySelectorAll('.plugin-card').length===2 && document.readyState==='complete'");
+  assert.equal(await evaluate("document.querySelectorAll('.source-link').length"),4);
+  assert.equal(await evaluate("document.documentElement.scrollWidth<=innerWidth"),true,'Horizontal overflow');
+  assert.equal(await evaluate("!!document.querySelector('.site-header a[aria-current=page]')"),true);
+  await evaluate("document.querySelector('[data-category=export]').click()");
+  assert.equal(await evaluate("document.querySelectorAll('.plugin-card:not([hidden])').length"),1);
+  await evaluate("(()=>{document.querySelector('[data-category=all]').click();const s=document.querySelector('#plugin-search');s.value='nonexistent';s.dispatchEvent(new Event('input',{bubbles:true}));})()");
+  assert.equal(await evaluate("document.querySelectorAll('.plugin-card:not([hidden])').length"),0);
+  assert.equal(await evaluate("document.querySelector('.search-empty').hidden"),false);
+  await evaluate("(()=>{const s=document.querySelector('#plugin-search');s.value='';s.dispatchEvent(new Event('input',{bubbles:true}));})()");
+  const metrics=await send('Page.getLayoutMetrics');
+  const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:true,clip:{x:0,y:0,width,height:Math.ceil(metrics.cssContentSize.height),scale:1}});
+  await writeFile(path.join(output,`plugins-${locale?'en':'zh'}-${width}.png`),Buffer.from(shot.data,'base64'));
+ }
+ assert.equal(errors.length,0,errors.join('\n'));
+ const catalog=await(await fetch(`http://127.0.0.1:${port}/plugins/catalog.json`)).json();assert.equal(catalog.schemaVersion,1);
+ console.log('Verified desktop/mobile layouts, bilingual navigation, category filters, search, four download links and catalog endpoint. Screenshots: '+output);
+}finally{socket?.close();browser.kill();server.close();}

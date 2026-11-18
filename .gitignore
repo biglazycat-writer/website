@@ -4,3 +4,5 @@ dist/
 .cache/
 .env
 .env.*
+public/plugins/packages/*.tgz
+public/plugins/packages/*.tmp

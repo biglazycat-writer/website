@@ -4,10 +4,12 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/astro.mjs dev",
+    "prebuild": "npm run prepare:plugins",
     "build": "node scripts/astro.mjs build",
     "preview": "node scripts/astro.mjs preview",
     "test": "node --test scripts/*.test.mjs",
     "sync:releases": "node scripts/sync-releases.mjs",
+    "prepare:plugins": "node scripts/prepare-plugins.mjs",
     "check": "node scripts/astro.mjs check",
     "check:static": "node scripts/check-static.mjs",
     "check:seo": "node scripts/check-seo.mjs"

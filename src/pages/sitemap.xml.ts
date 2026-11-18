@@ -5,7 +5,7 @@ import { helpEntries } from '../lib/help.mjs';
 import { xmlEscape } from '../lib/seo.mjs';
 export const GET: APIRoute = ({site}) => {
   const base=import.meta.env.BASE_URL;
-  const pages=[...['','en/','download/','en/download/','pricing/','en/pricing/','faq/','en/faq/'].map(path=>({path,updated:''})),...helpEntries(zh).map(item=>({path:`help/${item.section}/${item.doc}/`,updated:item.updated})),...helpEntries(en).map(item=>({path:`en/help/${item.section}/${item.doc}/`,updated:item.updated}))];
+  const pages=[...['','en/','download/','en/download/','pricing/','en/pricing/','faq/','en/faq/','plugins/','en/plugins/'].map(path=>({path,updated:''})),...helpEntries(zh).map(item=>({path:`help/${item.section}/${item.doc}/`,updated:item.updated})),...helpEntries(en).map(item=>({path:`en/help/${item.section}/${item.doc}/`,updated:item.updated}))];
   const entries=pages.map(page=>{
     const neutral=page.path.replace(/^en\//,'');
     const url=(path:string)=>xmlEscape(new URL(`${base}${path}`,site).href);
