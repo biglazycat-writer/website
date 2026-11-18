@@ -27,13 +27,23 @@ try{
  const evaluate=async expression=>{const result=await send('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(result.exceptionDetails)throw Error(result.exceptionDetails.text);return result.result.value;};
  const waitFor=async expression=>{const deadline=Date.now()+15000;while(Date.now()<deadline){if(await evaluate(expression))return;await new Promise(resolve=>setTimeout(resolve,100));}throw Error('Page condition failed: '+expression);};
  await send('Page.enable');await send('Runtime.enable');
- for(const [width,height,locale] of [[1280,1000,''],[390,844,''],[1280,900,'en/']]){
+ for(const [width,height,locale] of [[1280,800,''],[800,900,''],[390,844,''],[1280,900,'en/'],[390,844,'en/']]){
   await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<600});
   await send('Page.navigate',{url:`http://127.0.0.1:${port}/${locale}plugins/`});
   await waitFor("document.querySelectorAll('.plugin-card').length===2 && document.readyState==='complete'");
   assert.equal(await evaluate("document.querySelectorAll('.source-link').length"),4);
   assert.equal(await evaluate("document.documentElement.scrollWidth<=innerWidth"),true,'Horizontal overflow');
   assert.equal(await evaluate("!!document.querySelector('.site-header a[aria-current=page]')"),true);
+  await evaluate('document.fonts.ready');
+  const layout=await evaluate(`(() => {
+   const hero=document.querySelector('.plugin-hero').getBoundingClientRect();
+   const cards=[...document.querySelectorAll('.plugin-card')].map(card=>{const r=card.getBoundingClientRect();return {width:r.width,height:r.height,noOverflow:card.scrollWidth<=card.clientWidth+1};});
+   return {heroHeight:hero.height,cards,columns:getComputedStyle(document.querySelector('.plugin-grid')).gridTemplateColumns.split(' ').length,firstCardTop:document.querySelector('.plugin-card').getBoundingClientRect().top};
+  })()`);
+  assert.ok(layout.heroHeight<=210,'Introduction must stay short: '+JSON.stringify(layout));
+  assert.ok(layout.cards.every(card=>card.height<=370&&card.noOverflow),'Plugin cards must be compact and readable: '+JSON.stringify(layout));
+  assert.ok(layout.firstCardTop<height*.65,'Plugin collection must be visible in the first screen: '+JSON.stringify(layout));
+  if(width>=1100)assert.ok(layout.columns>=3&&layout.cards.every(card=>card.width<=380),'Wide screens must show compact card columns: '+JSON.stringify(layout));
   await evaluate("document.querySelector('[data-category=export]').click()");
   assert.equal(await evaluate("document.querySelectorAll('.plugin-card:not([hidden])').length"),1);
   await evaluate("(()=>{document.querySelector('[data-category=all]').click();const s=document.querySelector('#plugin-search');s.value='nonexistent';s.dispatchEvent(new Event('input',{bubbles:true}));})()");
