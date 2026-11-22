@@ -2,13 +2,34 @@
 import Layout from '../layouts/Layout.astro';
 import data from '../data/plugins.json';
 import { validateCatalog, packageSize } from '../lib/plugins.mjs';
-import { ArrowUpRight, Download, Check, Search, Puzzle, BookOpen, Send, ChevronRight, Mic, ScanText } from 'lucide-react';
+import { ArrowUpRight, Download, Check, Search, Puzzle, BookOpen, Send, ChevronRight, Mic, ScanText, icons as lucideIcons } from 'lucide-react';
 const {language='zh-CN'}=Astro.props;
 const english=language==='en-US';
 const catalog=validateCatalog(data) as typeof data;
 const title=english?'Plugins for your next creative step | BigLazyCat Writer':'插件 · 让创作多一种可能 | 大懒猫写作';
 const description=english?'Discover plugins for BigLazyCat Writer: WeChat publishing, typeset export, local read-aloud and OCR with translation. Compare versions and download from your preferred source.':'发现大懒猫写作插件：微信公众号发布、排版导出、本地朗读与图片识别翻译。查看功能、版本和兼容要求，自由选择官网或 GitHub 下载。';
 const categories=english?{all:'All plugins',publishing:'Publishing',export:'Export & design',audio:'Voice',ocr:'OCR & translate'}:{all:'全部插件',publishing:'内容发布',export:'排版与导出',audio:'语音与朗读',ocr:'识别与翻译'};
+// 目录 icon 与桌面端共享同一套取值（桌面端 docs/plugin-contract.md 修订 8）：
+// legacy 名称、lucide: 图标名、emoji/短文本、https 图片 URL。官网没有打包 Tabler
+// 图形集，tabler: 与未知名回退到默认书本图标。frontmatter 不能写 JSX，
+// 这里只产出描述，实际节点在下方模板里渲染。
+const LEGACY_PLUGIN_ICONS=['publish','book','mic','scan'];
+type PluginIconSpec={kind:'legacy'|'lucide'|'text'|'image'|'fallback';name?:string;text?:string;src?:string};
+const pluginIconSpec=(raw:string):PluginIconSpec=>{
+  const icon=raw.trim();
+  if (LEGACY_PLUGIN_ICONS.includes(icon)) return {kind:'legacy',name:icon};
+  if (/^https?:\/\//.test(icon)) return {kind:'image',src:icon};
+  const glyph=/^(lucide|tabler):([a-z0-9][a-z0-9-]{0,63})$/.exec(icon);
+  if (glyph) {
+    if (glyph[1]==='lucide') {
+      const pascal=glyph[2].split('-').map(part=>part.charAt(0).toUpperCase()+part.slice(1)).join('');
+      if ((lucideIcons as Record<string,unknown>)[pascal]) return {kind:'lucide',name:pascal};
+    }
+    return {kind:'fallback'};
+  }
+  if ([...icon].length<=8) return {kind:'text',text:icon};
+  return {kind:'fallback'};
+};
 ---
 <Layout language={language} title={title} description={description}>
   <div class="plugins-landing">
@@ -27,10 +48,11 @@ const categories=english?{all:'All plugins',publishing:'Publishing',export:'Expo
         const iconName=plugin.icon;
         const isPublish=iconName==='publish';
         const cardStyle=isPublish?'publish-card':iconName==='mic'?'voice-card':iconName==='scan'?'ocr-card':'export-card';
-        const icon=isPublish?<Send size={22}/>:iconName==='mic'?<Mic size={22}/>:iconName==='scan'?<ScanText size={22}/>:<BookOpen size={23}/>;
+        const iconSpec=pluginIconSpec(iconName);
+        const LucideIcon=iconSpec.kind==='lucide'?(lucideIcons as Record<string,any>)[iconSpec.name!]:null;
         const name=english?plugin.nameEn:plugin.name;
         return <article class:list={['plugin-card',cardStyle]} data-plugin-category={plugin.category} data-plugin-search={`${plugin.name} ${plugin.nameEn} ${plugin.description} ${plugin.descriptionEn} ${plugin.features.join(' ')}`.toLowerCase()}>
-          <div class="plugin-card-body"><div class="plugin-title-row"><span class="plugin-icon">{icon}</span><div><h3>{name}</h3><p>{english?'By BigLazyCat Writer':plugin.author}</p></div><span class="version">v{release.version}</span></div><p class="plugin-description">{english?plugin.descriptionEn:plugin.description}</p><ul class="plugin-features">{(english?plugin.featuresEn:plugin.features).map(feature=><li><Check size={13}/>{feature}</li>)}</ul>
+          <div class="plugin-card-body"><div class="plugin-title-row"><span class="plugin-icon">{iconSpec.kind==='legacy'?(iconSpec.name==='publish'?<Send size={22}/>:iconSpec.name==='mic'?<Mic size={22}/>:iconSpec.name==='scan'?<ScanText size={22}/>:<BookOpen size={22}/>):iconSpec.kind==='image'?<img class="plugin-icon-image" src={iconSpec.src} width="22" height="22" alt="" aria-hidden="true" loading="lazy"/>:iconSpec.kind==='lucide'&&LucideIcon?<LucideIcon size={22} strokeWidth={1.9} aria-hidden="true"/>:iconSpec.kind==='text'?<span class="plugin-icon-text">{iconSpec.text}</span>:<BookOpen size={23}/>}</span><div><h3>{name}</h3><p>{english?'By BigLazyCat Writer':plugin.author}</p></div><span class="version">v{release.version}</span></div><p class="plugin-description">{english?plugin.descriptionEn:plugin.description}</p><ul class="plugin-features">{(english?plugin.featuresEn:plugin.features).map(feature=><li><Check size={13}/>{feature}</li>)}</ul>
             <div class="plugin-downloads"><p><Download size={14}/>{english?'Choose your download source':'选择下载来源'}<span>{packageSize(release.size)}</span></p><div>{release.downloads.map(source=><a class:list={['source-link',source.id==='official'&&'source-primary']} href={source.url} data-event="plugin_download" data-plugin={plugin.id} data-source={source.id} download>{english?source.nameEn:source.name}<ArrowUpRight size={15}/></a>)}</div></div>
             <div class="plugin-card-meta"><span>{english?'Desktop': '桌面端'} ≥ {release.minimumClientVersion}</span><a href={`${plugin.homepage}/releases/tag/v${release.version}`} target="_blank" rel="noopener noreferrer">{english?'Release notes':'版本说明'}<ChevronRight size={13}/></a></div>
             <details class="checksum"><summary>{english?'Verify package · SHA-256':'校验安装包 · SHA-256'}</summary><code>{release.sha256}</code></details>
@@ -65,7 +87,7 @@ const categories=english?{all:'All plugins',publishing:'Publishing',export:'Expo
   .collection-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:20px 0 16px}.category-filters{display:flex;gap:5px;flex-wrap:wrap}.category-filters button{border:1px solid transparent;border-radius:6px;padding:7px 11px;color:var(--portal-text-3);font-size:12px;background:transparent;cursor:pointer}.category-filters button[aria-pressed=true]{background:var(--portal-bg-soft);border-color:var(--portal-border);color:var(--portal-text)}
   .plugin-search{display:flex;align-items:center;gap:8px;color:var(--portal-text-4);padding:8px 10px;border:1px solid var(--portal-border);border-radius:7px;background:#ffffff66}.plugin-search input{font:inherit;font-size:12px;width:165px;max-width:100%;color:var(--portal-text);background:none;outline:0;border:0}.plugin-search:focus-within{outline:2px solid var(--focus-ring-soft)}.plugin-search kbd{font:10px monospace;border:1px solid var(--portal-border);padding:1px 4px;border-radius:3px}
   .plugin-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.plugin-card{display:flex;min-width:0;border:1px solid var(--portal-border);border-radius:10px;background:var(--portal-bg-soft);transition:box-shadow .2s,border-color .2s}.plugin-card:hover{box-shadow:0 6px 20px #1f302909;border-color:#b6c3b8}.plugin-card[hidden]{display:none}.plugin-card-body{display:flex;flex-direction:column;min-width:0;flex:1;padding:18px}
-  .plugin-title-row{display:flex;align-items:center;gap:9px}.plugin-title-row>div{min-width:0}.plugin-icon{width:36px;height:36px;display:grid;place-items:center;border:1px solid #00000007;border-radius:9px;background:#eef5ee;color:#508065;flex:none}.export-card .plugin-icon{color:#78658d;background:#f0ecf5}.voice-card .plugin-icon{color:#8a6a3f;background:#f7f0e3}.ocr-card .plugin-icon{color:#4f6b83;background:#eaeff5}.plugin-title-row h3{font-size:16px;letter-spacing:-.02em;font-weight:600;margin:0 0 3px;overflow-wrap:anywhere}.plugin-title-row p{font-size:10px;color:var(--portal-text-4);margin:0}.version{margin-left:auto;font-size:10px;color:var(--portal-text-3);padding:3px 6px;background:var(--portal-bg-surface,#f6f6f3);border:1px solid var(--portal-border);border-radius:5px;white-space:nowrap;flex:none}
+  .plugin-title-row{display:flex;align-items:center;gap:9px}.plugin-title-row>div{min-width:0}.plugin-icon{width:36px;height:36px;display:grid;place-items:center;border:1px solid #00000007;border-radius:9px;background:#eef5ee;color:#508065;flex:none}.plugin-icon .plugin-icon-image{border-radius:8px;object-fit:contain}.plugin-icon .plugin-icon-text{line-height:1;font-size:22px}.export-card .plugin-icon{color:#78658d;background:#f0ecf5}.voice-card .plugin-icon{color:#8a6a3f;background:#f7f0e3}.ocr-card .plugin-icon{color:#4f6b83;background:#eaeff5}.plugin-title-row h3{font-size:16px;letter-spacing:-.02em;font-weight:600;margin:0 0 3px;overflow-wrap:anywhere}.plugin-title-row p{font-size:10px;color:var(--portal-text-4);margin:0}.version{margin-left:auto;font-size:10px;color:var(--portal-text-3);padding:3px 6px;background:var(--portal-bg-surface,#f6f6f3);border:1px solid var(--portal-border);border-radius:5px;white-space:nowrap;flex:none}
   .plugin-description{font-size:12px;line-height:1.8;color:var(--portal-text-3);margin:12px 0 10px}.plugin-features{list-style:none;display:flex;flex-wrap:wrap;gap:5px 10px;padding:0;margin:0 0 14px}.plugin-features li{font-size:10px;line-height:1.6;color:var(--portal-text-2);display:flex;align-items:center;gap:3px}.plugin-features svg{color:#7a9481;flex:none}
   .plugin-downloads{border-top:1px solid var(--portal-border);padding-top:12px;margin-top:auto}.plugin-downloads>p{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--portal-text-3);margin:0 0 9px}.plugin-downloads>p>span{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--portal-text-4)}.plugin-downloads>div{display:flex;gap:8px;flex-wrap:wrap}.source-link{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--portal-border);border-radius:6px;padding:7px 10px;min-width:100px;font-size:11px;text-decoration:none}.source-link:hover{border-color:#708676;background:#f3f6f2}.source-primary{background:#262e29;border-color:#262e29;color:#fff}.source-primary:hover{background:#425548;color:white}
   .plugin-card-meta{display:flex;justify-content:space-between;gap:10px;margin-top:12px;font-size:10px;color:var(--portal-text-4)}.plugin-card-meta a{display:flex;align-items:center;gap:2px;text-decoration:none}.checksum{font-size:10px;color:var(--portal-text-4);margin-top:9px}.checksum summary{cursor:pointer}.checksum code{display:block;word-break:break-all;line-height:1.8;padding:8px;background:var(--portal-bg);margin-top:8px;border-radius:4px}.collection-count{text-align:center;font-size:10px;color:var(--portal-text-4);margin:18px 0 0}.search-empty{padding:40px 16px;text-align:center;font-size:13px;color:var(--portal-text-3)}
