@@ -10,14 +10,14 @@ const {language='zh-CN',kind='faq'}=Astro.props;
 const english=language==='en-US';
 const copy=english?en:zh;
 const base=`${import.meta.env.BASE_URL}${english?'en/':''}`;
-const titles=english?{download:'Download BigLazyCat Creator',pricing:'Pricing and desktop licensing',faq:'BigLazyCat Creator: product FAQ'}:{download:'大懒猫创作平台官方下载与安装',pricing:'大懒猫创作平台价格与授权说明',faq:'大懒猫创作平台常见问题'};
-const descriptions=english?{download:'Download BigLazyCat Creator for Windows, macOS, Linux and Android. Choose the correct package and read the installation guide.',pricing:`Desktop license: ${purchase.price}. Read the trial, purchase and activation information before buying.`,faq:'Answers about local files, AI providers, the desktop trial, licensing and supported platforms.'}:{download:'下载大懒猫创作平台 Windows、macOS、Linux 与 Android 安装包，查看芯片架构选择、安装指南与官方发布渠道。',pricing:`大懒猫创作平台桌面版 ${purchase.price}，30 天全功能试用。查看买断授权、购买流程与激活说明。`,faq:'了解大懒猫创作平台的本地数据、AI 服务费用、30 天试用、桌面授权与支持平台。'};
+const titles=english?{download:'Download BigLazyCat Writer',pricing:'Pricing and desktop licensing',faq:'BigLazyCat Writer: product FAQ'}:{download:'大懒猫写作官方下载与安装',pricing:'大懒猫写作价格与授权说明',faq:'大懒猫写作常见问题'};
+const descriptions=english?{download:'Download BigLazyCat Writer for Windows, macOS, Linux and Android. Choose the correct package and read the installation guide.',pricing:`Desktop license: ${purchase.price}. Read the trial, purchase and activation information before buying.`,faq:'Answers about local files, AI providers, the desktop trial, licensing and supported platforms.'}:{download:'下载大懒猫写作 Windows、macOS、Linux 与 Android 安装包，查看芯片架构选择、安装指南与官方发布渠道。',pricing:`大懒猫写作桌面版 ${purchase.price}，30 天全功能试用。查看买断授权、购买流程与激活说明。`,faq:'了解大懒猫写作的本地数据、AI 服务费用、30 天试用、桌面授权与支持平台。'};
 const pageKind=kind as keyof typeof titles;
 const description=descriptions[pageKind];
 const questions=Array.from({length:9},(_,i)=>({q:(copy.faq.items as Record<string,string>)[`q${i+1}`],a:(copy.faq.items as Record<string,string>)[`a${i+1}`]}));
 const structuredData=kind==='faq'?[{'@type':'FAQPage',mainEntity:questions.map(item=>({'@type':'Question',name:item.q,acceptedAnswer:{'@type':'Answer',text:item.a}}))}]:[softwareSchema({site:Astro.site,base:import.meta.env.BASE_URL,language,description,purchase,downloads})];
 ---
-<Layout language={language} title={`${titles[pageKind]} | ${english?'BigLazyCat Creator':'大懒猫创作平台'}`} description={description} structuredData={structuredData}>
+<Layout language={language} title={`${titles[pageKind]} | ${english?'BigLazyCat Writer':'大懒猫写作'}`} description={description} structuredData={structuredData}>
   <article class="product-page">
     <p class="eyebrow">{english?'Local-first AI writing software':'本地优先的 AI 写作软件'}</p>
     <h1>{titles[pageKind]}</h1><p class="lead">{description}</p>

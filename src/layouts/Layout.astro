@@ -15,8 +15,8 @@ const urls = pageUrls(Astro.site, import.meta.env.BASE_URL, canonicalPath);
 const root = new URL(import.meta.env.BASE_URL, Astro.site).href;
 const image = new URL(`${base}/portal/screenshots/hero-desktop.webp`, Astro.site).href;
 const graph = [
-  {'@type':'Organization','@id':`${root}#organization`,name:'大懒猫创作平台',alternateName:'BigLazyCat Creator',url:root,logo:new URL(`${base}/logo.png`,Astro.site).href},
-  {'@type':'WebSite','@id':`${root}#website`,url:root,name:'大懒猫创作平台',alternateName:'BigLazyCat Creator',inLanguage:['zh-CN','en-US'],publisher:{'@id':`${root}#organization`}},
+  {'@type':'Organization','@id':`${root}#organization`,name:'大懒猫写作',alternateName:'BigLazyCat Writer',url:root,logo:new URL(`${base}/logo.png`,Astro.site).href},
+  {'@type':'WebSite','@id':`${root}#website`,url:root,name:'大懒猫写作',alternateName:'BigLazyCat Writer',inLanguage:['zh-CN','en-US'],publisher:{'@id':`${root}#organization`}},
   {'@type':'WebPage','@id':`${urls.canonical}#webpage`,url:urls.canonical,name:title,description,inLanguage:language,isPartOf:{'@id':`${root}#website`}},
   ...structuredData,
 ];
@@ -33,8 +33,8 @@ const graph = [
     {!noindex && <><link rel="alternate" hreflang="zh-CN" href={urls.zh} /><link rel="alternate" hreflang="en" href={urls.en} /><link rel="alternate" hreflang="x-default" href={urls.zh} /></>}
     <meta property="og:title" content={title} /><meta property="og:description" content={description} />
     <meta property="og:type" content="website" /><meta property="og:image" content={image} />
-    <meta property="og:image:alt" content={english ? 'BigLazyCat Creator desktop writing workspace' : '大懒猫创作平台桌面写作工作台'} />
-    <meta property="og:url" content={urls.canonical} /><meta property="og:site_name" content={english ? 'BigLazyCat Creator' : '大懒猫创作平台'} />
+    <meta property="og:image:alt" content={english ? 'BigLazyCat Writer desktop writing workspace' : '大懒猫写作桌面写作工作台'} />
+    <meta property="og:url" content={urls.canonical} /><meta property="og:site_name" content={english ? 'BigLazyCat Writer' : '大懒猫写作'} />
     <meta property="og:locale" content={english ? 'en_US' : 'zh_CN'} />
     <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} /><meta name="twitter:image" content={image} />
     {seo.verification.google && <meta name="google-site-verification" content={seo.verification.google} />}
@@ -45,7 +45,7 @@ const graph = [
   <body class={styles.page}>
     <a class="skip" href="#main">{english ? 'Skip to content' : '跳到正文'}</a>
     <header class="site-header">
-      <a class="brand" href={home}><img src={`${base}/logo.png`} width="36" height="36" alt="" />{english ? 'BigLazyCat Creator' : '大懒猫创作平台'}</a>
+      <a class="brand" href={home}><img src={`${base}/logo.png`} width="36" height="36" alt="" />{english ? 'BigLazyCat Writer' : '大懒猫写作'}</a>
       <nav aria-label={english ? 'Navigation' : '站点导航'}>
         <a href={`${home}#features`}>{english ? 'Features' : '特色'}</a>
         <a href={`${home}plugins/`} aria-current={Astro.url.pathname.replace(/\/$/,'').endsWith('/plugins') ? 'page' : undefined}>{english ? 'Plugins' : '插件'}</a>
@@ -57,7 +57,7 @@ const graph = [
     </header>
     <main id="main"><slot /></main>
     <div class="product-links"><a href={`${home}faq/`}>{english ? 'Product FAQ' : '产品常见问题'}</a><a href={`${home}help/intro/about/`}>{english ? 'About the product' : '关于产品'}</a><a href={`${home}help/intro/changelog/`}>{english ? 'Release notes' : '更新记录'}</a></div>
-    <footer class="site-footer"><a href={help}>{english ? 'Documentation' : '使用帮助'}</a>{downloads.channels.map(channel => <a href={channel.url}>{channel.name}</a>)}<a href="mailto:biglazycatwriter@163.com">biglazycatwriter@163.com</a><p>© {new Date().getFullYear()} {english ? 'BigLazyCat Creator' : '大懒猫创作平台'}</p></footer>
+    <footer class="site-footer"><a href={help}>{english ? 'Documentation' : '使用帮助'}</a>{downloads.channels.map(channel => <a href={channel.url}>{channel.name}</a>)}<a href="mailto:biglazycatwriter@163.com">biglazycatwriter@163.com</a><p>© {new Date().getFullYear()} {english ? 'BigLazyCat Writer' : '大懒猫写作'}</p></footer>
     <Analytics />
   </body>
 </html>

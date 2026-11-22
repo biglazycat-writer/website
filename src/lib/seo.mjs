@@ -17,8 +17,8 @@ export function softwareSchema({site,base,language,description,purchase,download
   const price = /^¥\s*([\d,]+(?:\.\d+)?)$/.exec(purchase.price);
   return {
     '@type':'SoftwareApplication', '@id':`${root}#software`,
-    name:language === 'en-US' ? 'BigLazyCat Creator' : '大懒猫创作平台',
-    alternateName:language === 'en-US' ? '大懒猫创作平台' : 'BigLazyCat Creator',
+    name:language === 'en-US' ? 'BigLazyCat Writer' : '大懒猫写作',
+    alternateName:language === 'en-US' ? '大懒猫写作' : 'BigLazyCat Writer',
     url:home, description, applicationCategory:'BusinessApplication',
     operatingSystem:'Windows, macOS, Linux, Android',
     image:new URL(`${base}logo.png`,site).href,

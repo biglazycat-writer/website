@@ -14,7 +14,7 @@ const url=new URL(canonicalPath,Astro.site).href;
 const root=new URL(base,Astro.site).href;
 const structuredData=[{'@type':'TechArticle',headline:item.title,description:helpDescription(item.body),inLanguage:language,url,dateModified:item.updated,author:{'@id':`${root}#organization`},mainEntityOfPage:{'@id':`${url}#webpage`}}, {'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:language==='en-US'?'Home':'首页',item:new URL(`${base}${language==='en-US'?'en/':''}`,Astro.site).href},{'@type':'ListItem',position:2,name:language==='en-US'?'Help':'帮助',item:new URL(help,Astro.site).href},{'@type':'ListItem',position:3,name:item.title,item:url}]}];
 ---
-<Layout title={`${item.title} · ${language==='en-US'?'BigLazyCat Creator':'大懒猫创作平台'}`} language={language} description={helpDescription(item.body)} canonicalPath={canonicalPath} structuredData={structuredData}>
+<Layout title={`${item.title} · ${language==='en-US'?'BigLazyCat Writer':'大懒猫写作'}`} language={language} description={helpDescription(item.body)} canonicalPath={canonicalPath} structuredData={structuredData}>
   <div class="help-layout"><aside><input id="help-search" type="search" placeholder={language==='en-US'?'Search docs':'搜索帮助文档'} aria-label={language==='en-US'?'Search docs':'搜索帮助文档'} />{Object.entries(data.sections).map(([key, group])=><section><h2>{group.title}</h2>{Object.entries(group.docs).map(([id, value])=><a class:list={['help-link', {'active':key===section&&id===doc}]} href={`${help}${key}/${id}/`}>{value.title}</a>)}</section>)}</aside><article><h1>{item.title}</h1><p class="updated">{item.updated}</p><div class="prose" set:html={renderHelp(item.body,base,language)} /></article></div>
 </Layout>
 <script>
