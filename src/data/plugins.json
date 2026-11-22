@@ -16,6 +16,19 @@
       "homepage": "https://github.com/biglazycat-writer/blc-plugin-publish",
       "releases": [
         {
+          "version": "0.2.4",
+          "minimumClientVersion": "0.4.10",
+          "apiVersion": 1,
+          "minimumApiRevision": 7,
+          "platforms": ["windows/amd64", "windows/arm64", "darwin/amd64", "darwin/arm64", "linux/amd64", "linux/arm64"],
+          "size": 1217453,
+          "sha256": "9973ea1a58103b223fb9c7f92790ab94c281922d9e34ba5258e1a3b0fab4badb",
+          "downloads": [
+            {"id": "official", "name": "官网", "nameEn": "Official mirror", "url": "https://biglazycatwriter.top/plugins/packages/blc-plugin-publish-0.2.4.tgz"},
+            {"id": "github", "name": "GitHub", "nameEn": "GitHub", "url": "https://github.com/biglazycat-writer/blc-plugin-publish/releases/download/v0.2.4/blc-plugin-publish-0.2.4.tgz"}
+          ]
+        },
+        {
           "version": "0.2.3",
           "minimumClientVersion": "0.4.10",
           "apiVersion": 1,
@@ -56,6 +69,19 @@
       "featuresEn": ["PDF · Word · EPUB", "Posters & images", "Offline fonts & typesetting"],
       "homepage": "https://github.com/biglazycat-writer/blc-export-book",
       "releases": [
+        {
+          "version": "0.1.5",
+          "minimumClientVersion": "0.4.10",
+          "apiVersion": 1,
+          "minimumApiRevision": 7,
+          "platforms": ["windows/amd64", "windows/arm64", "darwin/amd64", "darwin/arm64", "linux/amd64", "linux/arm64"],
+          "size": 59188655,
+          "sha256": "e635c95d710a14c1f85763a68785be235d837ad44b71baeea3e5e130415535bd",
+          "downloads": [
+            {"id": "official", "name": "官网", "nameEn": "Official mirror", "url": "https://biglazycatwriter.top/plugins/packages/blc-export-book-0.1.5.tgz"},
+            {"id": "github", "name": "GitHub", "nameEn": "GitHub", "url": "https://github.com/biglazycat-writer/blc-export-book/releases/download/v0.1.5/blc-export-book-0.1.5.tgz"}
+          ]
+        },
         {
           "version": "0.1.4",
           "minimumClientVersion": "0.4.10",
@@ -98,6 +124,19 @@
       "homepage": "https://github.com/biglazycat-writer/blc-plugin-voice",
       "releases": [
         {
+          "version": "0.4.3",
+          "minimumClientVersion": "0.4.10",
+          "apiVersion": 1,
+          "minimumApiRevision": 7,
+          "platforms": ["windows/amd64", "windows/arm64", "darwin/amd64", "darwin/arm64", "linux/amd64", "linux/arm64"],
+          "size": 92599,
+          "sha256": "2463ba5f74fca8e86c01544df5e29719344ab141cf99e5369aacec8528147a48",
+          "downloads": [
+            {"id": "official", "name": "官网", "nameEn": "Official mirror", "url": "https://biglazycatwriter.top/plugins/packages/blc-plugin-voice-0.4.3.tgz"},
+            {"id": "github", "name": "GitHub", "nameEn": "GitHub", "url": "https://github.com/biglazycat-writer/blc-plugin-voice/releases/download/v0.4.3/blc-plugin-voice-0.4.3.tgz"}
+          ]
+        },
+        {
           "version": "0.4.2",
           "minimumClientVersion": "0.4.10",
           "apiVersion": 1,
@@ -138,6 +177,19 @@
       "featuresEn": ["Image & PDF text", "Layout and coordinates", "Local CN–EN translation"],
       "homepage": "https://github.com/biglazycat-writer/blc-plugin-ocr",
       "releases": [
+        {
+          "version": "0.3.3",
+          "minimumClientVersion": "0.4.10",
+          "apiVersion": 1,
+          "minimumApiRevision": 7,
+          "platforms": ["windows/amd64", "windows/arm64", "darwin/amd64", "darwin/arm64", "linux/amd64", "linux/arm64"],
+          "size": 158571,
+          "sha256": "c9131e432d1ecea1440a6ed82b6717a49c72c7c39d0a9cc46e1454573a664e66",
+          "downloads": [
+            {"id": "official", "name": "官网", "nameEn": "Official mirror", "url": "https://biglazycatwriter.top/plugins/packages/blc-plugin-ocr-0.3.3.tgz"},
+            {"id": "github", "name": "GitHub", "nameEn": "GitHub", "url": "https://github.com/biglazycat-writer/blc-plugin-ocr/releases/download/v0.3.3/blc-plugin-ocr-0.3.3.tgz"}
+          ]
+        },
         {
           "version": "0.3.2",
           "minimumClientVersion": "0.4.10",
