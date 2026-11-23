@@ -1,7 +1,7 @@
 {
   "autoSync": false,
-  "version": "0.4.9",
-  "date": "2026-11-20",
+  "version": "0.4.11",
+  "date": "2026-11-23",
   "fallbackUrl": "https://github.com/biglazycat-writer/biglazycat-release/releases/latest",
   "channels": [
     {
@@ -17,7 +17,7 @@
     {
       "platform": "windows",
       "name": "安装版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.9/biglazycat-desktop-0.4.9-windows-amd64-installer.exe",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.11/biglazycat-desktop-0.4.11-windows-amd64-installer.exe",
       "kind": "installer",
       "arch": "amd64",
       "source": "github"
@@ -25,7 +25,7 @@
     {
       "platform": "windows",
       "name": "安装版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.9/biglazycat-desktop-0.4.9-windows-amd64-installer.exe",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.11/biglazycat-desktop-0.4.11-windows-amd64-installer.exe",
       "kind": "installer",
       "arch": "amd64",
       "source": "gitee"
@@ -33,7 +33,7 @@
     {
       "platform": "macos",
       "name": "Apple 芯片版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.9/biglazycat-desktop-0.4.9-macos-arm64.dmg",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.11/biglazycat-desktop-0.4.11-macos-arm64.dmg",
       "kind": "dmg",
       "arch": "arm64",
       "source": "github"
@@ -41,7 +41,7 @@
     {
       "platform": "macos",
       "name": "Apple 芯片版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.9/biglazycat-desktop-0.4.9-macos-arm64.dmg",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.11/biglazycat-desktop-0.4.11-macos-arm64.dmg",
       "kind": "dmg",
       "arch": "arm64",
       "source": "gitee"
@@ -49,7 +49,7 @@
     {
       "platform": "macos",
       "name": "Intel 版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.9/biglazycat-desktop-0.4.9-macos-amd64.dmg",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.11/biglazycat-desktop-0.4.11-macos-amd64.dmg",
       "kind": "dmg",
       "arch": "amd64",
       "source": "github"
@@ -57,7 +57,7 @@
     {
       "platform": "macos",
       "name": "Intel 版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.9/biglazycat-desktop-0.4.9-macos-amd64.dmg",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.11/biglazycat-desktop-0.4.11-macos-amd64.dmg",
       "kind": "dmg",
       "arch": "amd64",
       "source": "gitee"
@@ -65,7 +65,7 @@
     {
       "platform": "android",
       "name": "APK 版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.9/biglazycat-mobile-v0.4.9-release.apk",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.11/biglazycat-mobile-v0.4.11-release.apk",
       "kind": "apk",
       "arch": "",
       "source": "github"
@@ -73,7 +73,7 @@
     {
       "platform": "android",
       "name": "APK 版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.9/biglazycat-mobile-v0.4.9-release.apk",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.11/biglazycat-mobile-v0.4.11-release.apk",
       "kind": "apk",
       "arch": "",
       "source": "gitee"
@@ -81,7 +81,7 @@
     {
       "platform": "linux",
       "name": "deb 版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.9/biglazycat-desktop_0.4.9_amd64.deb",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.11/biglazycat-desktop_0.4.11_amd64.deb",
       "kind": "deb",
       "arch": "amd64",
       "source": "github"
@@ -89,7 +89,7 @@
     {
       "platform": "linux",
       "name": "deb 版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.9/biglazycat-desktop_0.4.9_amd64.deb",
+      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.11/biglazycat-desktop_0.4.11_amd64.deb",
       "kind": "deb",
       "arch": "amd64",
       "source": "gitee"
@@ -97,7 +97,7 @@
     {
       "platform": "linux",
       "name": "AppImage 版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.9/biglazycat-desktop-0.4.9-x86_64.AppImage",
+      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.11/biglazycat-desktop-0.4.11-x86_64.AppImage",
       "kind": "appimage",
       "arch": "amd64",
       "source": "github"
