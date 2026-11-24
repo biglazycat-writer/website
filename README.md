@@ -1,27 +1,42 @@
-# 大懒猫写作门户
+# 大懒猫写作 · 官方网站
 
-大懒猫写作的独立静态门户，提供产品介绍、客户端下载、主题展示与中英文使用帮助。
+**简体中文** | [English](README.en.md)
 
-使用 Astro 构建，GitHub Pages 托管，Cloudflare 为自定义域名提供缓存加速。页面运行不依赖 VPS。
+> 本地优先的 AI 写作软件 —— 选题、思考、沉淀、分享，让每个灵感都长成作品。
 
-## 本地预览
+这里是 [大懒猫写作（BigLazyCat Writer）](https://biglazycatwriter.top/)的官方门户仓库。官网是品牌的线上名片：介绍产品、提供下载与购买入口、展示官方插件与在线工具，并收录中英文使用帮助。
 
-1. 安装 Node.js 22.23.4 或更高版本，运行 `npm ci`。
-2. 运行 `npm run dev`，打开终端显示的地址。
-3. 运行 `npm test`、`npm run check`、`npm run build` 检查发布内容；`npm run preview` 预览构建产物。
+## 认识大懒猫写作
 
-默认路径是 `/website/`，对应 `https://biglazycat-writer.github.io/website/`。在自定义域名下开发或构建，设置 `SITE_URL=https://biglazycatwriter.top`、`BASE_PATH=/`。
+大懒猫写作面向长篇小说、公众号与内容创作者，把写作、资料研究、AI 辅助、思维导图、画布、排版导出和发布放进同一个工作台。桌面端覆盖 Windows / macOS / Linux，移动端提供 Android 版本。
 
-## 发布
+- **本地优先**：一篇内容就是一个标准 Markdown 文件，合集是普通文件夹，导图是 `.xmind`，画布是 `.canvas`。任何编辑器都能打开，任何网盘或 Git 都能备份，作品始终属于你。
+- **AI 优先，不绑模型**：可接入主流模型服务、OpenAI 兼容接口，或调用本机的 Claude / Codex；内置 MCP，让 AI 帮你建文件、理大纲、排版发布。
+- **一次买断**：桌面版没有订阅和版本分级，30 天全功能试用，购买后所有功能与后续更新都归你。
+- **开放生态**：官方插件提供公众号排版、书籍级排版导出、OCR 与语音等能力；也能按自己的流程定制插件。
 
-GitHub 仓库 Settings → Pages → Source 选择 **GitHub Actions**，推送 `main` 后自动部署。工作流每天重新构建，也可以手动执行。
+## 官网里有什么
 
-购买配置在 `src/data/purchase.json`，下载配置在 `src/data/downloads.json`，修改后重新构建或推送发布即可生效，字段说明见[营销配置指南](docs/marketing-config.md)。
+| 你想做的事 | 去哪里 |
+| --- | --- |
+| 了解产品与功能特色 | [首页](https://biglazycatwriter.top/) |
+| 下载桌面版 / 移动版 | [下载页](https://biglazycatwriter.top/download/) · [GitHub 发布列表](https://github.com/biglazycat-writer/biglazycat-release/releases) · [Gitee 发布列表](https://gitee.com/biglazycatwriter/blc-release/releases) |
+| 查看授权与购买 | [购买页](https://biglazycatwriter.top/pricing/) |
+| 浏览官方插件 | [插件目录](https://biglazycatwriter.top/plugins/) |
+| 阅读使用帮助与更新记录 | [帮助中心](https://biglazycatwriter.top/help/) |
+| 查找常见疑问 | [常见问题](https://biglazycatwriter.top/faq/) |
+| 联系我们 | biglazycatwriter@163.com |
 
-下载默认手动配置，不访问 GitHub API。将下载配置的 `autoSync` 改为 `true` 后，构建流程才会从正式 Release 更新版本与安装包清单；获取失败时工作流失败，保留上一版站点。
+官网还提供公众号排版、在线 PPT、结构化画布、思维导图和 PDF 阅读等在线工具，打开浏览器即可体验。
 
-接入域名与缓存的步骤见 [部署指南](docs/deployment.md)，迁移边界与实施计划见 [实施计划](docs/implementation-plan.md)。
+## 官方项目
 
-插件展示与桌面端商店共用 `src/data/plugins.json`；更新版本、配置多个下载来源和构建官网镜像见 [插件目录指南](docs/plugin-catalog.md)。构建前自动下载并校验插件镜像，也可单独运行 `npm run prepare:plugins`。
+| 项目 | 说明 |
+| --- | --- |
+| [biglazycat-release](https://github.com/biglazycat-writer/biglazycat-release) | 桌面版与移动版安装包、历史版本与更新清单 |
+| [blc-export-book](https://github.com/biglazycat-writer/blc-export-book) | 排版导出：文章与文件夹生成 PDF / Word / EPUB / HTML / PNG |
+| [blc-plugin-publish](https://github.com/biglazycat-writer/blc-plugin-publish) | 微信公众号排版与草稿发布 |
+| [blc-plugin-sdk](https://github.com/biglazycat-writer/blc-plugin-sdk) | 官方插件 SDK |
+| [blc-plugin-template](https://github.com/biglazycat-writer/blc-plugin-template) | 插件模板工程 |
 
-标题与搜索描述在 `src/data/seo.json`，页面自动生成结构化数据、双语链接、站点地图和 robots.txt；上线后的收录步骤见 [SEO 指南](docs/seo.md)。
+品牌与产品信息以官网为准；下载只认 GitHub / Gitee 官方发布列表和官网提供的地址。
