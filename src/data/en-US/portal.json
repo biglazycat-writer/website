@@ -43,7 +43,7 @@
   "art": {},
   "features": {
     "hero": {
-    "sloganLead": "BigLazyCat Writer ",
+      "sloganLead": "BigLazyCat Writer ",
       "sloganEm": "local-first AI writing software",
       "desc": "Pick a topic, think it through, build it up, share it out — the 大懒猫 creator workspace grows every spark into finished work.",
       "badges": "Local-first · AI-first · Git-first",
@@ -52,12 +52,14 @@
       "scrollHint": "Scroll down for more"
     },
     "title": "The right tool for every step",
-    "subtitle": "From writing and organizing to canvas, mind maps and AI — every core feature gets its own tour, shown with real screens.",
+    "subtitle": "The tools you actually reach for when writing 3,000 words a day.",
     "shots": {
       "dual": {
         "title": "Write left, research right",
         "desc": "The built-in browser opens multiple tabs beside your draft; image-grab and article-clipping extensions ship built in — save any page into your library in one click and keep writing.",
-        "alt": "大懒猫 desktop dual-pane mode: editor on the left, built-in browser with multiple tabs on the right"
+        "alt": "大懒猫 desktop dual-pane mode: editor on the left, built-in browser with multiple tabs on the right",
+        "play": "Play demo · 10s",
+        "pause": "Pause"
       },
       "pdf": {
         "title": "Read here, annotate there",
@@ -76,89 +78,53 @@
       }
     },
     "caps": {
-      "localfirst": {
-        "title": "Local-first files",
-        "desc": "Your work lives as plain files on your own computer — private, secure and writable offline; no lock-in, no proprietary formats. Switch devices or tools and the folder comes with you."
+      "files": {
+        "title": "Files are the draft",
+        "desc": "Drafts are .md files on your own disk — standard Markdown any editor opens. No lock-in, no account; sync over Git, WebDAV or S3, offline."
+      },
+      "workspace": {
+        "title": "Workspaces",
+        "desc": "Several workspaces in one window — a book, a topic, each its own library. Drafts, notes, materials and maps in one place: an editor that is also a knowledge base."
       },
       "ai": {
-        "title": "AI-first",
-        "desc": "Reuse the Codex and Claude CLIs already installed on your machine, or configure your own API endpoints in the app; continue, rewrite, polish and search your whole library with AI always at hand."
-      },
-      "vim": {
-        "title": "VIM mode",
-        "desc": "Pure keyboard control with VIM keybindings — hands never leave the home row; pair it with flow mode and the pomodoro timer for deep-focus writing."
-      },
-      "platforms": {
-        "title": "Every platform",
-        "desc": "Windows, macOS, Linux and Android — at the office, at home or on the commute, pick up exactly where you left off."
-      },
-      "markdown": {
-        "title": "Markdown WYSIWYG",
-        "desc": "What you type is the final layout, with a source-code mode for side-by-side comparison; tables, code highlighting, formulas, images and multiple tabs are all there."
-      },
-      "outline": {
-        "title": "Outlines & annotations",
-        "desc": "The outline panel gives you the whole volume and chapter structure with batch re-leveling; jot annotations beside paragraphs so revision clues never get lost."
-      },
-      "flow": {
-        "title": "Flow-mode immersive writing",
-        "desc": "A paragraph-by-paragraph writing flow, with a pomodoro timer and typing aids, helps long-form authors actually finish the book, day by day."
-      },
-      "mindmap": {
-        "title": "Mind map",
-        "desc": "Grow outlines into maps in one click, with node styles and outline import, saved as real files on your disk."
-      },
-      "canvas": {
-        "title": "Structured canvas",
-        "desc": "Lay out ideas with nodes and connections, attach canvases to chapters, and let AI restyle the canvas on command."
-      },
-      "bilink": {
-        "title": "Bidirectional links",
-        "desc": "Type [[ to link chapters and materials; backlinks collect automatically, weaving characters, foreshadowing and ideas into one web."
-      },
-      "tags": {
-        "title": "Tag system",
-        "desc": "Tag content, images and prompts, merge similar tags and clean up unused ones, and click any tag to see everything related."
-      },
-      "search": {
-        "title": "Global search",
-        "desc": "One search across works, chapters, PDFs, images, mind maps, canvases and prompts; jump straight to the hit with highlighting."
-      },
-      "pdf": {
-        "title": "PDF reading",
-        "desc": "A local PDF library with full-text search and annotations, AI summary assisted reading and full-page translation."
-      },
-      "image": {
-        "title": "AI image workbench",
-        "desc": "Prompt templates and size-ratio presets, an async task queue, and finished images filed automatically for instant use."
-      },
-      "browser": {
-        "title": "Built-in browser & web clipper",
-        "desc": "Look things up in the built-in browser and clip web articles into Markdown in one click, with images saved locally."
-      },
-      "wechat": {
-        "title": "WeChat formatting & publishing",
-        "desc": "Format with one-click themes, upload body images and covers automatically, and deliver drafts straight to your WeChat account."
-      },
-      "book": {
-        "title": "Book making",
-        "desc": "Turn a collection into a book: EPUB e-book, Word manuscript or print-ready PDF, with cover, TOC and volume splits."
-      },
-      "multiwindow": {
-        "title": "Multi-window, multi-screen",
-        "desc": "Drag tabs into standalone windows on another display and split the main window side by side — write, research and sketch at once."
-      },
-      "mcp": {
-        "title": "MCP & external AI",
-        "desc": "A built-in MCP server callable by external AI clients such as Codex and Claude, plus external MCP tools to extend your workflow."
+        "title": "AI first",
+        "desc": "Not tied to a model or tool: call your Claude or Codex, or any API. With MCP built in, AI creates files, restructures outlines and publishes."
       },
       "plugins": {
-        "title": "Plugin platform",
-        "desc": "An open plugin system: standalone pages, commands, custom file editors and scheduled tasks can all come from plugins; the official SDK and template repo work out of the box, with the full guide under \"Plugin development\" in the Help Center."
+        "title": "Plugin market",
+        "desc": "An official market that keeps growing: WeChat formatting, page capture, article clipping. If none fits, ask AI to build one for your flow."
       },
-      "export": {
-        "title": "Export & sync",
-        "desc": "Export to EPUB / PDF / DOCX at will; WebDAV / S3 / Git keep multiple devices in sync."
+      "editing": {
+        "title": "Editing & layout",
+        "desc": "See the final layout as you type, no second pass. Tables, formulas, code and images paste straight in; switch to source to check."
+      },
+      "longform": {
+        "title": "Long-form structure",
+        "desc": "Volumes, chapters and sections in one outline — drag to re-level a whole volume. Notes sit by the paragraph; [[ links, with backlinks."
+      },
+      "research": {
+        "title": "Research & search",
+        "desc": "Look things up in a browser pane, clip pages to Markdown. Search a PDF library, select a passage for an AI summary; search notes and maps too."
+      },
+      "visual": {
+        "title": "Diagrams & canvas",
+        "desc": "An outline becomes a mind map in a click. Architecture, flowcharts and plot lines on a canvas — AI redraws it from one sentence."
+      },
+      "focus": {
+        "title": "Focus mode",
+        "desc": "Only the paragraph you are in stays lit, the rest fades. Native Vim bindings keep your hands on the keyboard."
+      },
+      "rhythm": {
+        "title": "Writing rhythm",
+        "desc": "Pomodoro, chapter to-dos, daily words and streak in one panel — how much you wrote and what is open, at a glance."
+      },
+      "publish": {
+        "title": "Books & publishing",
+        "desc": "Dozens of chapters into a book: EPUB to publish, Word for the publisher, PDF to print, cover and TOC generated. One click for WeChat."
+      },
+      "more": {
+        "title": "And more",
+        "desc": "Tabs, dual screen, two columns, themes, image library — too many to list, install and try."
       }
     }
   },

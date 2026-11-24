@@ -1,31 +1,24 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
-  AppWindow,
   ArrowRight,
   BookOpen,
-  Brush,
   ChevronDown,
-  Compass,
   Feather,
-  FileSearch,
   HardDrive,
-  ImagePlus,
-  Keyboard,
-  Link2,
+  Layers,
   ListTree,
   Map,
-  MonitorSmartphone,
+  Pause,
   PenLine,
-  Plug,
+  Play,
+  Plus,
   Puzzle,
-  RefreshCw,
   Search,
-  Send,
   Sparkles,
-  Tags,
+  Timer,
   type LucideIcon,
 } from "lucide-react";
 import { useTranslation } from "../lib/use-translation";
@@ -33,46 +26,122 @@ import { BUILTIN_THEMES } from "../lib/builtin-themes";
 import { BrushDivider } from "./PortalArt";
 import styles from "./PortalFeatures.module.css";
 
-/** 能力网格的键前缀，与 portal 语言包 features.caps.* 一一对应。 */
+/** 能力网格的键前缀，与 portal 语言包 features.caps.* 一一对应。共十二格。 */
 type CapabilityKey =
-  | "localfirst"
+  | "files"
+  | "workspace"
   | "ai"
-  | "vim"
-  | "platforms"
-  | "markdown"
-  | "outline"
-  | "flow"
-  | "bilink"
-  | "tags"
-  | "search"
-  | "mindmap"
-  | "canvas"
-  | "pdf"
-  | "image"
-  | "browser"
-  | "wechat"
-  | "book"
-  | "multiwindow"
-  | "mcp"
   | "plugins"
-  | "export";
+  | "editing"
+  | "longform"
+  | "research"
+  | "visual"
+  | "focus"
+  | "rhythm"
+  | "publish"
+  | "more";
 
 /** 产品截图的键前缀，与 portal 语言包 features.shots.* 一一对应。 */
-type ShotKey = "dual" | "pdf" | "mindmap" | "canvas";
+type ShotKey = "pdf" | "mindmap" | "canvas";
 
 interface Capability {
   icon: LucideIcon;
   /** features.caps.<key> 下的文案键前缀 */
   key: CapabilityKey;
+  /** 卡片图标的强调色（浅色调色板，图标底色由它派生） */
+  accent: string;
 }
 
 /** 产品场景：桌面端真实使用场景，整行交错排布。宽高一并写出来，图片加载前也先占好位。 */
 const SHOTS: { key: ShotKey; src: string; width: number; height: number }[] = [
-  { key: "dual", src: `${import.meta.env.BASE_URL}portal/screenshots/dual-column.webp`, width: 1917, height: 1014 },
   { key: "pdf", src: `${import.meta.env.BASE_URL}portal/screenshots/pdf-reading.webp`, width: 1917, height: 1008 },
   { key: "mindmap", src: `${import.meta.env.BASE_URL}portal/screenshots/mindmap-reading.webp`, width: 1916, height: 1017 },
   { key: "canvas", src: `${import.meta.env.BASE_URL}portal/screenshots/canvas-architecture.webp`, width: 1912, height: 1013 },
 ];
+
+/**
+ * 双栏演示片：同内容的 GIF 有 38MB，压成 1280 宽的 H.264 只有 1.3MB，
+ * 所以这里放视频而不是动图；首帧单独导成 JPG 当封面，preload="none"，
+ * 不点就不下载——滚到这一屏也不会白白吃掉流量。
+ */
+const CLIP = {
+  src: `${import.meta.env.BASE_URL}portal/video/dual-column.mp4`,
+  poster: `${import.meta.env.BASE_URL}portal/video/dual-column-poster.jpg`,
+  width: 1200,
+  height: 676,
+};
+
+/**
+ * 双栏演示：封面先占位，左下角一枚播放按钮引导点击。
+ * 播放中按钮淡出，鼠标移上去（或键盘聚焦）才重新出现，方便暂停。
+ */
+function ClipPlayer({ play, pause }: { play: string; pause: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  // 滚出视野就暂停：读者已经滑到下一节，没必要继续解码和耗电
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0]?.isIntersecting && !video.paused) video.pause();
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  const toggle = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused || video.ended) {
+      // 用户取消了播放权限或浏览器拦截时静默失败，画面仍停在封面上
+      void video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  };
+
+  return (
+    <span className={styles.clipFrame}>
+      <video
+        ref={videoRef}
+        className={styles.clipVideo}
+        poster={CLIP.poster}
+        width={CLIP.width}
+        height={CLIP.height}
+        preload="none"
+        muted
+        playsInline
+        disablePictureInPicture
+        onClick={toggle}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        onEnded={() => {
+          // 播完回到封面：load() 会让 poster 重新生效，下一轮从第一帧开始
+          const video = videoRef.current;
+          if (!video) return;
+          video.currentTime = 0;
+          video.load();
+        }}
+      >
+        <source src={CLIP.src} type="video/mp4" />
+      </video>
+      <button
+        type="button"
+        className={styles.clipToggle}
+        data-playing={playing}
+        aria-label={playing ? pause : play}
+        onClick={toggle}
+      >
+        {playing ? <Pause size={14} /> : <Play size={14} />}
+        {!playing && <span>{play}</span>}
+      </button>
+    </span>
+  );
+}
 
 /**
  * 倾斜展开的主题样张：挑四套气质差异最大的内置主题（原 PortalThemes 栏并入场景区）。
@@ -85,29 +154,31 @@ const FAN_THEMES = FAN_THEME_IDS.map((id) => {
   return { id: theme.id, name: theme.name };
 });
 
+/**
+ * 能力清单：十二格排成 4 × 3，不做标签切换，一屏看完。
+ * 顺序按一天写作的真实路径走：稿件存在哪 → 知识怎么攒 → AI 与插件 → 怎么写 → 写完怎么发。
+ * 末格是「更多功能」清单，装不下的 TAB / 双屏 / 双栏收在这里。
+ */
 const CAPABILITIES: Capability[] = [
-  { icon: HardDrive, key: "localfirst" },
-  { icon: Sparkles, key: "ai" },
-  { icon: Keyboard, key: "vim" },
-  { icon: MonitorSmartphone, key: "platforms" },
-  { icon: PenLine, key: "markdown" },
-  { icon: ListTree, key: "outline" },
-  { icon: Feather, key: "flow" },
-  { icon: Link2, key: "bilink" },
-  { icon: Tags, key: "tags" },
-  { icon: Search, key: "search" },
-  { icon: Map, key: "mindmap" },
-  { icon: Brush, key: "canvas" },
-  { icon: FileSearch, key: "pdf" },
-  { icon: ImagePlus, key: "image" },
-  { icon: Compass, key: "browser" },
-  { icon: Send, key: "wechat" },
-  { icon: BookOpen, key: "book" },
-  { icon: AppWindow, key: "multiwindow" },
-  { icon: Plug, key: "mcp" },
-  { icon: Puzzle, key: "plugins" },
-  { icon: RefreshCw, key: "export" },
+  { icon: HardDrive, key: "files", accent: "#3b6ff0" },
+  { icon: Layers, key: "workspace", accent: "#159a6b" },
+  { icon: Sparkles, key: "ai", accent: "#7c5cf7" },
+  { icon: Puzzle, key: "plugins", accent: "#d98324" },
+  { icon: PenLine, key: "editing", accent: "#3f3f46" },
+  { icon: ListTree, key: "longform", accent: "#0e8f96" },
+  { icon: Search, key: "research", accent: "#4f5bd5" },
+  { icon: Map, key: "visual", accent: "#c9506f" },
+  { icon: Feather, key: "focus", accent: "#0b7285" },
+  { icon: Timer, key: "rhythm", accent: "#a8577e" },
+  { icon: BookOpen, key: "publish", accent: "#3b6ff0" },
+  { icon: Plus, key: "more", accent: "#8a8a93" },
 ];
+
+/** 把 #rrggbb 强调色淡化成 10% 透明底色，做图标胶囊的底 */
+function tint(hex: string) {
+  const value = Number.parseInt(hex.slice(1), 16);
+  return `rgba(${(value >> 16) & 255}, ${(value >> 8) & 255}, ${value & 255}, .1)`;
+}
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -118,14 +189,15 @@ const headingReveal = {
   transition: { duration: 0.8, ease: EASE },
 };
 
+/** 十二张卡逐张浮现：一次入场，不再有切组重播 */
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.06 } },
+  show: { transition: { staggerChildren: 0.05 } },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 26, scale: 0.96 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: EASE } },
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
 };
 
 /**
@@ -281,14 +353,22 @@ export function PortalFeatures() {
           transition={{ duration: 1.1, delay: 0.18, ease: EASE }}
         >
           <div className={styles.heroDevices}>
-            <img
-              className={styles.heroDesktop}
-              src={`${import.meta.env.BASE_URL}portal/screenshots/hero-desktop.webp`}
-              alt={t("features.hero.alt")}
-              width={1968}
-              height={1128}
-              decoding="async"
-            />
+            {/* 优先 AVIF：同体积下细节更实，界面文字在高分屏上更清晰；不支持时回落 WebP */}
+            <picture>
+              <source
+                type="image/avif"
+                srcSet={`${import.meta.env.BASE_URL}portal/screenshots/hero-desktop.avif`}
+              />
+              <img
+                className={styles.heroDesktop}
+                src={`${import.meta.env.BASE_URL}portal/screenshots/hero-desktop.webp`}
+                alt={t("features.hero.alt")}
+                width={1948}
+                height={1069}
+                decoding="async"
+                fetchPriority="high"
+              />
+            </picture>
             <img
               className={styles.heroMobile}
               src={`${import.meta.env.BASE_URL}portal/screenshots/hero-mobile.webp`}
@@ -317,28 +397,35 @@ export function PortalFeatures() {
         </motion.a>
       </div>
 
-      {/* 第二项：能力总览网格 */}
+      {/* 第二项：能力总览——十二格全部平铺，不做标签切换，一屏看完 */}
       <div className={styles.gridHead} id="capabilities">
-        <motion.div className={styles.heading} {...headingReveal}>
-          <h2 className={styles.gridTitle}>{t("features.title")}</h2>
-          <BrushDivider />
-          <p className={styles.gridSubtitle}>{t("features.subtitle")}</p>
-        </motion.div>
+        <div className={styles.gridTop}>
+          <motion.div className={styles.gridHeading} {...headingReveal}>
+            <h2 className={styles.gridTitle}>{t("features.title")}</h2>
+            <BrushDivider />
+            <p className={styles.gridSubtitle}>{t("features.subtitle")}</p>
+          </motion.div>
+        </div>
         <motion.div
           className={styles.capabilityGrid}
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.12 }}
+          viewport={{ once: true, amount: 0.15 }}
         >
           {CAPABILITIES.map((capability) => {
             const Icon = capability.icon;
             return (
               <motion.article key={capability.key} className={styles.capabilityCard} variants={item}>
-                <span className={styles.capabilityIcon}>
-                  <Icon size={17} />
-                </span>
-                <h3>{t(`features.caps.${capability.key}.title`)}</h3>
+                <div className={styles.capabilityHead}>
+                  <span
+                    className={styles.capabilityIcon}
+                    style={{ color: capability.accent, background: tint(capability.accent) }}
+                  >
+                    <Icon size={15} strokeWidth={1.9} />
+                  </span>
+                  <h3>{t(`features.caps.${capability.key}.title`)}</h3>
+                </div>
                 <p>{t(`features.caps.${capability.key}.desc`)}</p>
               </motion.article>
             );
@@ -349,6 +436,19 @@ export function PortalFeatures() {
       {/* 第三项：产品场景，不设区块标题；五条全宽色带（双栏 → 主题 → PDF → 导图 → 画布）黑白交替，滚动时逐行浮现 */}
       <div className={styles.shotsBand}>
         {SHOT_BANDS.map((variant) => {
+          if (variant.key === "dual") {
+            return (
+              <motion.figure key="dual" className={`${styles.shotBand} ${styles[variant.band]}`} {...shotReveal}>
+                <div className={`${styles.shotRow} ${styles[variant.row]}`}>
+                  <ClipPlayer play={t("features.shots.dual.play")} pause={t("features.shots.dual.pause")} />
+                  <figcaption className={`${styles.shotIntro} ${styles[variant.intro]}`}>
+                    <h3>{t("features.shots.dual.title")}</h3>
+                    <p>{t("features.shots.dual.desc")}</p>
+                  </figcaption>
+                </div>
+              </motion.figure>
+            );
+          }
           if (variant.key === "themes") {
             return (
               <motion.figure key="themes" id="themes" className={`${styles.shotBand} ${styles[variant.band]}`} {...shotReveal}>

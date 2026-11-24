@@ -188,17 +188,25 @@
 /* 电脑居中撑满组合宽度；宽度取三者最小：舞台宽 / 1680 上限 / 舞台高减 44px 滚动空隙换算的宽 */
 .heroDevices {
   position: relative;
-  width: min(100%, 1680px, calc((100cqh - 44px) * 1.7447));
-  aspect-ratio: 1968 / 1128;
+  width: min(100%, 1680px, calc((100cqh - 44px) * 1.8223));
+  aspect-ratio: 1948 / 1069;
 }
 
 .heroDesktop {
   display: block;
   width: 100%;
   height: auto;
+  /* 保持像素不被浏览器二次重采样糊化：不做平滑拉伸 */
+  image-rendering: auto;
   filter:
     drop-shadow(0 2px 6px rgba(24, 24, 26, .08))
     drop-shadow(0 24px 48px rgba(24, 24, 26, .22));
+}
+
+/* picture 只是 AVIF/WebP 的切换壳，不参与布局尺寸计算 */
+.heroDevices picture {
+  display: block;
+  width: 100%;
 }
 
 /* 手机倚靠电脑右侧屏幕边框：顶端左倾搭在边框上（transform-origin 左上），
@@ -245,18 +253,41 @@
   50% { transform: translateY(7px); }
 }
 
-/* ── 第二项：能力总览（整块炭黑带：首屏浅色 → 能力区黑 → 场景区黑白交替，明暗出节奏）── */
+/* ── 第二项：能力总览（不开独立底色，直接落在页面中性灰桌面上，卡片白纸浮起）── */
 .gridHead {
   border-top: 1px solid var(--portal-border);
-  background: #171719;
-  padding: clamp(72px, 9vh, 100px) 24px clamp(76px, 9.5vh, 104px);
+  background: transparent;
+  padding: clamp(40px, 4.6vh, 52px) 24px clamp(48px, 5.6vh, 64px);
+  /* 九项一屏看完：正好一屏高，标题与卡片作为一组垂直居中，翻页时不露半截 */
+  min-height: calc(100svh - 74px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 标题区与网格同为 1280 宽，左对齐 */
+.gridTop {
+  /* 父级是纵向 flex：给 auto 左右边距会缩成文字宽度再居中，撑满才和网格同一条左对齐线 */
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px 40px;
+  flex-wrap: wrap;
+}
+
+.gridHeading {
+  text-align: left;
+  max-width: 620px;
 }
 
 .gridTitle {
   font-family: var(--portal-serif);
   font-size: clamp(24px, 2.6vw, 34px);
   font-weight: 700;
-  color: #fff;
+  color: var(--portal-text);
   line-height: 1.3;
   letter-spacing: -0.01em;
   margin: 0;
@@ -266,62 +297,77 @@
   margin-top: 14px;
   font-size: 16px;
   line-height: 1.85;
-  color: rgba(255, 255, 255, .66);
+  color: var(--portal-text-3);
 }
 
 .capabilityGrid {
   max-width: 1280px;
-  margin: clamp(36px, 5vh, 52px) auto 0;
+  margin: clamp(20px, 2.6vh, 28px) auto 0;
   display: grid;
+  /* 十二格排成 4 × 3：一屏看完；列窄了但每张卡仍能放下三行说明 */
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: 14px 14px;
 }
 
 .capabilityCard {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 24px 22px 26px;
-  /* 黑带上的暗色浮层：半透明白底 + 微亮描边，与场景区的暗色卡一致 */
-  background: rgba(255, 255, 255, .05);
-  border: 1px solid rgba(255, 255, 255, .12);
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+  padding: 20px 20px 22px;
+  /* 白纸卡片落在灰桌面上：极浅描边 + 一层几乎看不见的投影 */
+  background: #fff;
+  border: 1px solid var(--portal-border);
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(24, 24, 26, .04);
   transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
 }
 
 .capabilityCard:hover {
-  border-color: rgba(255, 255, 255, .3);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .25), 0 18px 36px -22px rgba(0, 0, 0, .8);
+  border-color: var(--portal-border-2);
+  box-shadow: 0 1px 2px rgba(24, 24, 26, .05), 0 18px 34px -24px rgba(24, 24, 26, .4);
   transform: translateY(-2px);
+}
+
+/* 图标与卡片标题同一行：小色块在左，标题在右 */
+.capabilityHead {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 9px;
 }
 
 .capabilityIcon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  margin-bottom: 15px;
-  color: #fff;
-  background: rgba(255, 255, 255, .08);
-  border-radius: 9px;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  /* 颜色与底色由每张卡的强调色内联给出，这里只兜底 */
+  color: #3f3f46;
+  background: #f4f2ee;
+  border-radius: 7px;
 }
 
 .capabilityCard h3 {
-  color: #fff;
-  font-size: 15.5px;
+  color: var(--portal-text);
+  font-size: 15px;
   font-weight: 700;
-  line-height: 1.45;
+  line-height: 1.4;
   letter-spacing: 0.005em;
-  margin: 0 0 8px;
+  margin: 0;
+  min-width: 0;
 }
 
 .capabilityCard p {
-  color: rgba(255, 255, 255, .62);
-  font-size: 13.5px;
+  color: var(--portal-text-3);
+  font-size: 13px;
   line-height: 1.72;
   margin: 0;
+  /* 说明统一最多四行，卡片高度靠内容自然撑开，不出现半行截断的视觉噪音 */
+  overflow-wrap: anywhere;
+  /* 末行不要只剩一两个字（Chrome 116+，不支持的浏览器忽略） */
+  text-wrap: pretty;
 }
 
 /* ── 第三项：产品场景（无区块标题；四行全宽色带，每行一种构图与背景，滚动时逐行浮现）── */
@@ -389,6 +435,74 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* 双栏演示片：外框与截图同一套描边与投影，视频按 16:9 撑满；封面取自首帧，点开后不闪 */
+.clipFrame {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #0f0f11;
+  box-shadow:
+    0 0 0 1px rgba(24, 24, 26, .07),
+    0 2px 6px rgba(24, 24, 26, .04),
+    0 28px 52px -30px rgba(24, 24, 26, .32);
+}
+
+.clipVideo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1200 / 676;
+  cursor: pointer;
+}
+
+/* 播放按钮压在左下角，像录像上的控制条，不遮正文；播放中淡出，鼠标移入或键盘聚焦再出现 */
+.clipToggle {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px 7px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(24, 24, 26, .74);
+  color: #fff;
+  font-family: inherit;
+  font-size: 12.5px;
+  line-height: 1;
+  letter-spacing: .01em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: opacity .22s ease, transform .22s ease, background .22s ease;
+}
+
+.clipToggle:hover {
+  background: rgba(24, 24, 26, .9);
+  transform: translateY(-1px);
+}
+
+.clipToggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* 播放中退成右下角一枚小图标，平时隐形，不挡画面 */
+.clipToggle[data-playing="true"] {
+  left: auto;
+  right: 14px;
+  padding: 8px;
+  opacity: 0;
+}
+
+.clipFrame:hover .clipToggle[data-playing="true"],
+.clipToggle[data-playing="true"]:focus-visible {
+  opacity: 1;
 }
 
 /* 黑色带上截图描一圈亮边，阴影换成深色投影，避免白框发闷 */
