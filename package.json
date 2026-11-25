@@ -9,6 +9,7 @@
     "preview": "node scripts/astro.mjs preview",
     "test": "node --test scripts/*.test.mjs",
     "sync:releases": "node scripts/sync-releases.mjs",
+    "sync:updates": "node scripts/sync-updates.mjs",
     "prepare:plugins": "node scripts/prepare-plugins.mjs",
     "check": "node scripts/astro.mjs check",
     "check:static": "node scripts/check-static.mjs",

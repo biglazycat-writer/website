@@ -40,3 +40,14 @@
 | [blc-plugin-template](https://github.com/biglazycat-writer/blc-plugin-template) | 插件模板工程 |
 
 品牌与产品信息以官网为准；下载只认 GitHub / Gitee 官方发布列表和官网提供的地址。
+
+## 客户端更新地址
+
+桌面端把下面这两个地址作为首选更新源（清单由发布仓库签名生成，本站只做只读镜像）：
+
+- 正式渠道：<https://biglazycatwriter.top/updates/stable.json>
+- 测试渠道：<https://biglazycatwriter.top/updates/beta.json>
+
+`npm run sync:updates` 在构建前从发布仓库拉取各平台清单写入 `public/updates/`（不入库），
+Pages 工作流已包含该步骤，新版本发布后重新构建一次即可生效，无需改动站点代码。
+GitHub 或 Gitee 不可达时客户端会自动切换，因此镜像滞后不会阻塞发版。
