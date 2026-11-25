@@ -1,0 +1,7 @@
+# pnpm 11 对依赖的安装脚本默认拦截，需要显式表态；这里不表态就会直接 ERR_PNPM_IGNORED_BUILDS，
+# pnpm run dev 前置的依赖检查也会一起失败。
+allowBuilds:
+  # devDependencies 里的 node@22.23.5 是给 Astro 用的运行时：Astro 7 要求 Node >= 22.23.4，
+  # 而本机 nvm4w 装的是 22.22.2，差一点。它的 postinstall 会下载对应平台的 Node 二进制，
+  # 装好后 node_modules/.bin/node 就是 22.23.5，pnpm run 时优先于系统 node。
+  node: true

@@ -80,19 +80,23 @@
     "caps": {
       "files": {
         "title": "Files are the draft",
-        "desc": "Drafts are .md files on your own disk — standard Markdown any editor opens. No lock-in, no account; sync over Git, WebDAV or S3, offline."
+        "desc": "Your drafts are .md files on your own disk, open in any editor. No lock-in; sync via Git, WebDAV or S3, and write offline."
       },
       "workspace": {
         "title": "Workspaces",
-        "desc": "Several workspaces in one window — a book, a topic, each its own library. Drafts, notes, materials and maps in one place: an editor that is also a knowledge base."
+        "desc": "Several workspaces in one window: a book, a topic, each its own library. Drafts, notes, materials and maps in one place."
+      },
+      "search": {
+        "title": "Full-text search",
+        "desc": "One index over drafts, notes, PDFs, maps and canvases — files you never opened still match, with the line that matched."
       },
       "ai": {
         "title": "AI first",
-        "desc": "Not tied to a model or tool: call your Claude or Codex, or any API. With MCP built in, AI creates files, restructures outlines and publishes."
+        "desc": "Any model, any tool: call the Claude or Codex you have, or point it at an API. MCP built in, so AI writes files and books."
       },
       "plugins": {
         "title": "Plugin market",
-        "desc": "An official market that keeps growing: WeChat formatting, page capture, article clipping. If none fits, ask AI to build one for your flow."
+        "desc": "An official market that keeps growing: WeChat formatting, page capture, article clipping. If none fits, ask AI to build one."
       },
       "editing": {
         "title": "Editing & layout",
@@ -100,15 +104,27 @@
       },
       "longform": {
         "title": "Long-form structure",
-        "desc": "Volumes, chapters and sections in one outline — drag to re-level a whole volume. Notes sit by the paragraph; [[ links, with backlinks."
+        "desc": "Volumes, chapters, sections in one outline — drag to re-level a whole volume. Notes sit by the paragraph; [[ links, with backlinks."
       },
-      "research": {
-        "title": "Research & search",
-        "desc": "Look things up in a browser pane, clip pages to Markdown. Search a PDF library, select a passage for an AI summary; search notes and maps too."
+      "pdf": {
+        "title": "PDF reader",
+        "desc": "Local PDFs with contents, full-text search and page translation. Select a passage for an AI summary; notes sit in the margin."
       },
-      "visual": {
-        "title": "Diagrams & canvas",
-        "desc": "An outline becomes a mind map in a click. Architecture, flowcharts and plot lines on a canvas — AI redraws it from one sentence."
+      "mindmap": {
+        "title": "Mind maps",
+        "desc": "An outline becomes a mind map in a click — edit nodes, icons and link styles. Notes grow into a map you prune as you go."
+      },
+      "canvas": {
+        "title": "Canvas",
+        "desc": "Components, connectors and custom node styles for architecture and flowcharts. Select any of it and AI redraws the whole."
+      },
+      "image": {
+        "title": "Images & assets",
+        "desc": "Pick a ratio and generate images; they land in the asset library and drop into the text. Screenshots and covers live there too."
+      },
+      "clip": {
+        "title": "Web clipping",
+        "desc": "A built-in browser with side-by-side tabs: clip an article or an image into Markdown and your library, no extension needed."
       },
       "focus": {
         "title": "Focus mode",
@@ -120,11 +136,11 @@
       },
       "publish": {
         "title": "Books & publishing",
-        "desc": "Dozens of chapters into a book: EPUB to publish, Word for the publisher, PDF to print, cover and TOC generated. One click for WeChat."
+        "desc": "Dozens of chapters into a book: EPUB to publish, Word for the editor, PDF to print, cover and TOC generated."
       },
       "more": {
         "title": "And more",
-        "desc": "Tabs, dual screen, two columns, themes, image library — too many to list, install and try."
+        "desc": "Tabs, dual screen, two columns, themes, multiple windows — too many to list, install and try."
       }
     }
   },

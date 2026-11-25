@@ -7,16 +7,20 @@ import {
   BookOpen,
   ChevronDown,
   Feather,
+  FileText,
+  Globe,
   HardDrive,
+  ImagePlus,
   Layers,
   ListTree,
-  Map,
+  Network,
   Pause,
   PenLine,
   Play,
   Plus,
   Puzzle,
   Search,
+  Shapes,
   Sparkles,
   Timer,
   type LucideIcon,
@@ -26,16 +30,20 @@ import { BUILTIN_THEMES } from "../lib/builtin-themes";
 import { BrushDivider } from "./PortalArt";
 import styles from "./PortalFeatures.module.css";
 
-/** 能力网格的键前缀，与 portal 语言包 features.caps.* 一一对应。共十二格。 */
+/** 能力网格的键前缀，与 portal 语言包 features.caps.* 一一对应。共十六格。 */
 type CapabilityKey =
   | "files"
   | "workspace"
+  | "search"
   | "ai"
   | "plugins"
   | "editing"
   | "longform"
-  | "research"
-  | "visual"
+  | "pdf"
+  | "mindmap"
+  | "canvas"
+  | "image"
+  | "clip"
   | "focus"
   | "rhythm"
   | "publish"
@@ -155,21 +163,26 @@ const FAN_THEMES = FAN_THEME_IDS.map((id) => {
 });
 
 /**
- * 能力清单：十二格排成 4 × 3，不做标签切换，一屏看完。
- * 顺序按一天写作的真实路径走：稿件存在哪 → 知识怎么攒 → AI 与插件 → 怎么写 → 写完怎么发。
- * 末格是「更多功能」清单，装不下的 TAB / 双屏 / 双栏收在这里。
+ * 能力清单：十六格排成 4 × 4，不做标签切换，一屏看完。
+ * 顺序按一天写作的真实路径走：稿件存在哪 → 知识怎么攒 → AI 与插件 → 怎么写 → 读完画完 → 写完怎么发。
+ * 三种资料形态各占一格（搜索 / PDF / 剪藏），三种图形各占一格（导图 / 画布 / 图片），都写清具体能做什么。
+ * 末格是「更多功能」清单，装不下的 TAB / 双屏 / 主题收在这里。
  */
 const CAPABILITIES: Capability[] = [
   { icon: HardDrive, key: "files", accent: "#3b6ff0" },
   { icon: Layers, key: "workspace", accent: "#159a6b" },
+  { icon: Search, key: "search", accent: "#4f5bd5" },
   { icon: Sparkles, key: "ai", accent: "#7c5cf7" },
   { icon: Puzzle, key: "plugins", accent: "#d98324" },
   { icon: PenLine, key: "editing", accent: "#3f3f46" },
   { icon: ListTree, key: "longform", accent: "#0e8f96" },
-  { icon: Search, key: "research", accent: "#4f5bd5" },
-  { icon: Map, key: "visual", accent: "#c9506f" },
+  { icon: FileText, key: "pdf", accent: "#c9506f" },
+  { icon: Network, key: "mindmap", accent: "#a8577e" },
+  { icon: Shapes, key: "canvas", accent: "#c2410c" },
+  { icon: ImagePlus, key: "image", accent: "#5f8c2a" },
+  { icon: Globe, key: "clip", accent: "#2c6ea8" },
   { icon: Feather, key: "focus", accent: "#0b7285" },
-  { icon: Timer, key: "rhythm", accent: "#a8577e" },
+  { icon: Timer, key: "rhythm", accent: "#9061a8" },
   { icon: BookOpen, key: "publish", accent: "#3b6ff0" },
   { icon: Plus, key: "more", accent: "#8a8a93" },
 ];
@@ -189,7 +202,7 @@ const headingReveal = {
   transition: { duration: 0.8, ease: EASE },
 };
 
-/** 十二张卡逐张浮现：一次入场，不再有切组重播 */
+/** 十六张卡逐张浮现：一次入场，不再有切组重播 */
 const container = {
   hidden: {},
   show: { transition: { staggerChildren: 0.05 } },
@@ -397,7 +410,7 @@ export function PortalFeatures() {
         </motion.a>
       </div>
 
-      {/* 第二项：能力总览——十二格全部平铺，不做标签切换，一屏看完 */}
+      {/* 第二项：能力总览——十六格全部平铺，不做标签切换，一屏看完 */}
       <div className={styles.gridHead} id="capabilities">
         <div className={styles.gridTop}>
           <motion.div className={styles.gridHeading} {...headingReveal}>

@@ -257,8 +257,8 @@
 .gridHead {
   border-top: 1px solid var(--portal-border);
   background: transparent;
-  padding: clamp(40px, 4.6vh, 52px) 24px clamp(48px, 5.6vh, 64px);
-  /* 九项一屏看完：正好一屏高，标题与卡片作为一组垂直居中，翻页时不露半截 */
+  padding: clamp(28px, 3.4vh, 40px) 24px clamp(32px, 4vh, 44px);
+  /* 十六格一屏看完：正好一屏高，标题与卡片作为一组垂直居中，翻页时不露半截 */
   min-height: calc(100svh - 74px);
   display: flex;
   flex-direction: column;
@@ -302,18 +302,18 @@
 
 .capabilityGrid {
   max-width: 1280px;
-  margin: clamp(20px, 2.6vh, 28px) auto 0;
+  margin: clamp(16px, 2vh, 22px) auto 0;
   display: grid;
-  /* 十二格排成 4 × 3：一屏看完；列窄了但每张卡仍能放下三行说明 */
+  /* 十六格排成 4 × 4：一屏看完；列窄了但每张卡仍能放下三行说明 */
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px 14px;
+  gap: 12px 14px;
 }
 
 .capabilityCard {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  padding: 20px 20px 22px;
+  padding: 18px 18px 18px;
   /* 白纸卡片落在灰桌面上：极浅描边 + 一层几乎看不见的投影 */
   background: #fff;
   border: 1px solid var(--portal-border);
