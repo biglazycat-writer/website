@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "version": "0.4.12",
+  "channel": "stable",
+  "name": "大懒猫写作 0.4.12",
+  "notes": "优化问题",
+  "publishedAt": "2026-11-25T10:27:24.573Z",
+  "artifacts": [
+    {
+      "platform": "linux",
+      "arch": "amd64",
+      "url": "https://api.biglazycatwriter.top/release/0.4.12/biglazycat-desktop_0.4.12_amd64.deb",
+      "filename": "biglazycat-desktop_0.4.12_amd64.deb",
+      "size": 46647408,
+      "digestAlgo": "sha256",
+      "digest": "fjk/wHEUejOlyVk7oYTcxnYfETW81s482iriudVY/A8=",
+      "signatureAlgo": "ed25519",
+      "signature": "6J9mw71VSmPfMLS1Lhf4TPz8Ymg+maX6cKseQSsj7q5D+NETaDZ3cU1rJ3Iinbqtkt5CjBXMwA21kOOt7d9WDA=="
+    }
+  ],
+  "downloads": [],
+  "metadata": {}
+}

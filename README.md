@@ -43,11 +43,25 @@
 
 ## 客户端更新地址
 
-桌面端把下面这两个地址作为首选更新源（清单由发布仓库签名生成，本站只做只读镜像）：
+桌面端首选下面两个地址（一个文件包含所有平台，清单由发版机签名生成）：
 
-- 正式渠道：<https://biglazycatwriter.top/updates/stable.json>
-- 测试渠道：<https://biglazycatwriter.top/updates/beta.json>
+- 正式渠道：<https://biglazycatwriter.top/update-feed/stable.json>
+- 测试渠道：<https://biglazycatwriter.top/update-feed/beta.json>
+- Linux deb：<https://biglazycatwriter.top/update-feed/deb/<amd64|arm64>/stable.json>
 
-`npm run sync:updates` 在构建前从发布仓库拉取各平台清单写入 `public/updates/`（不入库），
-Pages 工作流已包含该步骤，新版本发布后重新构建一次即可生效，无需改动站点代码。
-GitHub 或 Gitee 不可达时客户端会自动切换，因此镜像滞后不会阻塞发版。
+清单由 `desktop/scripts/update-feed.mjs` 生成并写入本站 `public/update-feed/`，随站点一起发布；
+安装包本身放自有服务器直链下载（`https://api.biglazycatwriter.top/release/<版本>/`），清单里的地址可以随时手改，不影响签名校验。
+
+## 下载区数据
+
+下载页的「最新安装包」不再手工维护，`npm run sync:downloads` 会读 `public/update-feed/stable.json`
+的 `downloads` 段，把版本号、日期和各平台安装包地址写进 `src/data/downloads.json`
+（构建前自动执行，`npm run dev` 也会先同步一次）。
+
+- 装机地址一律取自清单，指向自有服务器，发版只需要重新生成清单；
+- 「发布渠道」「所有历史版本」和 `fallbackUrl` 不读清单，仍是 `downloads.json` 里写死的
+  GitHub / Gitee 发布页，用户要看全部历史版本时直接去发布页，而不是把官网当成下载站；
+- 清单缺 `downloads` 段或地址不是 http(s) 时构建直接报错，避免页面继续挂着过期按钮。
+
+站点不再镜像按平台清单：`public/updates/` 及其同步脚本已移除。0.4.12 及更早的客户端本来就只读
+GitHub / Gitee 的 `updates/**.json`，没经过本站；新客户端只读 `update-feed/`，所以这里不需要再放一份。

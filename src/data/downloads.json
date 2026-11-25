@@ -16,91 +16,63 @@
   "assets": [
     {
       "platform": "windows",
-      "name": "安装版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.12/biglazycat-desktop-0.4.12-windows-amd64-installer.exe",
+      "name": "安装版本",
+      "url": "https://api.biglazycatwriter.top/release/0.4.12/biglazycat-desktop-0.4.12-windows-amd64-installer.exe",
       "kind": "installer",
       "arch": "amd64",
-      "source": "github"
-    },
-    {
-      "platform": "windows",
-      "name": "安装版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.12/biglazycat-desktop-0.4.12-windows-amd64-installer.exe",
-      "kind": "installer",
-      "arch": "amd64",
-      "source": "gitee"
+      "source": "self",
+      "filename": "biglazycat-desktop-0.4.12-windows-amd64-installer.exe",
+      "size": 37900093
     },
     {
       "platform": "macos",
-      "name": "Apple 芯片版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.12/biglazycat-desktop-0.4.12-macos-arm64.dmg",
+      "name": "Apple 芯片版本",
+      "url": "https://api.biglazycatwriter.top/release/0.4.12/biglazycat-desktop-0.4.12-macos-arm64.dmg",
       "kind": "dmg",
       "arch": "arm64",
-      "source": "github"
+      "source": "self",
+      "filename": "biglazycat-desktop-0.4.12-macos-arm64.dmg",
+      "size": 50366018
     },
     {
       "platform": "macos",
-      "name": "Apple 芯片版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.12/biglazycat-desktop-0.4.12-macos-arm64.dmg",
-      "kind": "dmg",
-      "arch": "arm64",
-      "source": "gitee"
-    },
-    {
-      "platform": "macos",
-      "name": "Intel 版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.12/biglazycat-desktop-0.4.12-macos-amd64.dmg",
+      "name": "Intel 版本",
+      "url": "https://api.biglazycatwriter.top/release/0.4.12/biglazycat-desktop-0.4.12-macos-amd64.dmg",
       "kind": "dmg",
       "arch": "amd64",
-      "source": "github"
-    },
-    {
-      "platform": "macos",
-      "name": "Intel 版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.12/biglazycat-desktop-0.4.12-macos-amd64.dmg",
-      "kind": "dmg",
-      "arch": "amd64",
-      "source": "gitee"
-    },
-    {
-      "platform": "android",
-      "name": "APK 版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.12/biglazycat-mobile-v0.4.12-release.apk",
-      "kind": "apk",
-      "arch": "",
-      "source": "github"
-    },
-    {
-      "platform": "android",
-      "name": "APK 版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.12/biglazycat-mobile-v0.4.12-release.apk",
-      "kind": "apk",
-      "arch": "",
-      "source": "gitee"
+      "source": "self",
+      "filename": "biglazycat-desktop-0.4.12-macos-amd64.dmg",
+      "size": 52377206
     },
     {
       "platform": "linux",
-      "name": "deb 版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.12/biglazycat-desktop_0.4.12_amd64.deb",
-      "kind": "deb",
-      "arch": "amd64",
-      "source": "github"
-    },
-    {
-      "platform": "linux",
-      "name": "deb 版本 · Gitee",
-      "url": "https://gitee.com/biglazycatwriter/blc-release/releases/download/v0.4.12/biglazycat-desktop_0.4.12_amd64.deb",
-      "kind": "deb",
-      "arch": "amd64",
-      "source": "gitee"
-    },
-    {
-      "platform": "linux",
-      "name": "AppImage 版本 · GitHub",
-      "url": "https://github.com/biglazycat-writer/biglazycat-release/releases/download/v0.4.12/biglazycat-desktop-0.4.12-x86_64.AppImage",
+      "name": "AppImage 版本",
+      "url": "https://api.biglazycatwriter.top/release/0.4.12/biglazycat-desktop-0.4.12-x86_64.AppImage",
       "kind": "appimage",
       "arch": "amd64",
-      "source": "github"
+      "source": "self",
+      "filename": "biglazycat-desktop-0.4.12-x86_64.AppImage",
+      "size": 110443000
+    },
+    {
+      "platform": "linux",
+      "name": "deb 安装包",
+      "url": "https://api.biglazycatwriter.top/release/0.4.12/biglazycat-desktop_0.4.12_amd64.deb",
+      "kind": "deb",
+      "arch": "amd64",
+      "source": "self",
+      "filename": "biglazycat-desktop_0.4.12_amd64.deb",
+      "size": 46647408
+    },
+    {
+      "platform": "android",
+      "name": "安卓安装包",
+      "url": "https://api.biglazycatwriter.top/release/0.4.12/biglazycat-mobile-v0.4.12-release.apk",
+      "kind": "apk",
+      "arch": "arm64",
+      "source": "self",
+      "filename": "biglazycat-mobile-v0.4.12-release.apk",
+      "size": 83690044
     }
   ]
 }
