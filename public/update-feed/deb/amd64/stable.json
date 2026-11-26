@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
-  "version": "0.4.13",
+  "version": "0.4.14",
   "channel": "stable",
-  "name": "大懒猫写作 0.4.13",
-  "notes": "优化界面细节",
-  "publishedAt": "2026-11-26T14:12:32.621Z",
+  "name": "大懒猫写作 0.4.14",
+  "notes": "修复linux激活不了问题",
+  "publishedAt": "2026-11-26T23:22:30.622Z",
   "artifacts": [
     {
       "platform": "linux",
       "arch": "amd64",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-desktop_0.4.13_amd64.deb",
-      "filename": "biglazycat-desktop_0.4.13_amd64.deb",
-      "size": 45540682,
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-desktop_0.4.14_amd64.deb",
+      "filename": "biglazycat-desktop_0.4.14_amd64.deb",
+      "size": 45832286,
       "digestAlgo": "sha256",
-      "digest": "7YiTGc/961WToS2G9BhFXxguZek8ldbhZ8kPiJrmQJQ=",
+      "digest": "pvCIwkqJYxzC6csGiyIJ/3ljNHg4giuQNFOg3GRhhHQ=",
       "signatureAlgo": "ed25519",
-      "signature": "cxdjJ36uKJRz83gdno2WDg4XnOqA0DJ2N9R+vb9TcAAU27+ejde6+L0/f63g6NM8pigqtukuiucX/FZV6kjFBA=="
+      "signature": "bg8kzUMA6qOmPqH27z9knXX7EeOANHkrbu6THuXUmosPQFWKvNkS/FCSgGy0pT9fCVjahIi0ekb6jL9enll+BA=="
     }
   ],
   "downloads": [],

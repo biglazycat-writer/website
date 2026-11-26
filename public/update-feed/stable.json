@@ -1,43 +1,43 @@
 {
   "schemaVersion": 1,
-  "version": "0.4.13",
+  "version": "0.4.14",
   "channel": "stable",
-  "name": "大懒猫写作 0.4.13",
-  "notes": "优化界面细节",
-  "publishedAt": "2026-11-26T14:12:31.695Z",
+  "name": "大懒猫写作 0.4.14",
+  "notes": "修复linux激活不了问题",
+  "publishedAt": "2026-11-26T23:22:29.723Z",
   "artifacts": [
     {
       "platform": "darwin",
       "arch": "",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-desktop-0.4.13-macos-universal-update.zip",
-      "filename": "biglazycat-desktop-0.4.13-macos-universal-update.zip",
-      "size": 89823025,
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-desktop-0.4.14-macos-universal-update.zip",
+      "filename": "biglazycat-desktop-0.4.14-macos-universal-update.zip",
+      "size": 89725571,
       "digestAlgo": "sha256",
-      "digest": "LbauBt+bkBN41infBx0PXq9BfVcraVFaEaY8b4bf8sA=",
+      "digest": "cYxlcTP3oye6HrRtOV0D+fG7fxxC+WYbVMr+m6HH9iY=",
       "signatureAlgo": "ed25519",
-      "signature": "Xf1+ktp4vdS0YJv8PKjjejFl5YI4iu+OQl2loBu+1GdjxYS+fNwIf7bMBQCsUWqq0GWyASVVNSeHH6ttr8uYBA=="
+      "signature": "F6HarU7dBzUTUcGyvVzD9g1vMFECSvXPkld/UOhfBqEepAPwZiznnVcbKLJcVcsmpwbbzuuFLJFK3rwkTDixAA=="
     },
     {
       "platform": "linux",
       "arch": "amd64",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-desktop-0.4.13-x86_64.AppImage",
-      "filename": "biglazycat-desktop-0.4.13-x86_64.AppImage",
-      "size": 109517304,
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-desktop-0.4.14-x86_64.AppImage",
+      "filename": "biglazycat-desktop-0.4.14-x86_64.AppImage",
+      "size": 109677048,
       "digestAlgo": "sha256",
-      "digest": "TWSnddfT63SKiRpyS+R7K/x7MNDIsz/nIYDprTcv+Mw=",
+      "digest": "Twz3F9ckb6KILpUdnHZOQXS6RSSQwbcWr5uypwRaKHw=",
       "signatureAlgo": "ed25519",
-      "signature": "yhYm2oMeNm3TOMmkKb/3/jeHSxgpSJMU8oh7M2FYQGfT5yGFA0Jb4wulo69NUykT0AODU4i7R1ZWIN/fT3jZDg=="
+      "signature": "eK+Fv5xCGD/bNm6Tfbc4m4E6tgkFt/gNmZ3cl1k0ezkpEz2kwOQCyOYCmOZe1J/OcglbzUYJEbaH5ReXS+p6BQ=="
     },
     {
       "platform": "windows",
       "arch": "amd64",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-desktop-0.4.13-windows-amd64-update.zip",
-      "filename": "biglazycat-desktop-0.4.13-windows-amd64-update.zip",
-      "size": 45089152,
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-desktop-0.4.14-windows-amd64-update.zip",
+      "filename": "biglazycat-desktop-0.4.14-windows-amd64-update.zip",
+      "size": 45073176,
       "digestAlgo": "sha256",
-      "digest": "2Uh1J7VSjIKMCgbTC2GeBlpu0evBOBGMXGIJz6PjHVE=",
+      "digest": "OyU/e1Zh9LYoQgYwLf3N/M6MD9kR14BoAEv0U5EivA4=",
       "signatureAlgo": "ed25519",
-      "signature": "ugXyoqGeMxe+sctfRKjWFLBllfZUF727XAE3bMPyRe4Ck8uU8ahAF3rhOrkPLiwhRDrxX24A/p3kQfcgLhlmCA=="
+      "signature": "hcz9xbBmRZPZ8XOTUXRRToEmU5gVq4ePFmC8KlPSYegUbQixIrbqk9zNbHbkLGgD7UfV4J2AXGF/Rsvn+85+BA=="
     }
   ],
   "downloads": [
@@ -46,8 +46,8 @@
       "arch": "arm64",
       "kind": "apk",
       "name": "安卓安装包",
-      "filename": "biglazycat-mobile-v0.4.13-release.apk",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-mobile-v0.4.13-release.apk",
+      "filename": "biglazycat-mobile-v0.4.14-release.apk",
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-mobile-v0.4.14-release.apk",
       "size": 83691092
     },
     {
@@ -55,45 +55,45 @@
       "arch": "amd64",
       "kind": "dmg",
       "name": "Intel 版本",
-      "filename": "biglazycat-desktop-0.4.13-macos-amd64.dmg",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-desktop-0.4.13-macos-amd64.dmg",
-      "size": 51121881
+      "filename": "biglazycat-desktop-0.4.14-macos-amd64.dmg",
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-desktop-0.4.14-macos-amd64.dmg",
+      "size": 50861188
     },
     {
       "platform": "darwin",
       "arch": "arm64",
       "kind": "dmg",
       "name": "Apple 芯片版本",
-      "filename": "biglazycat-desktop-0.4.13-macos-arm64.dmg",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-desktop-0.4.13-macos-arm64.dmg",
-      "size": 49036791
+      "filename": "biglazycat-desktop-0.4.14-macos-arm64.dmg",
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-desktop-0.4.14-macos-arm64.dmg",
+      "size": 49159247
     },
     {
       "platform": "deb",
       "arch": "amd64",
       "kind": "deb",
       "name": "deb 安装包",
-      "filename": "biglazycat-desktop_0.4.13_amd64.deb",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-desktop_0.4.13_amd64.deb",
-      "size": 45540682
+      "filename": "biglazycat-desktop_0.4.14_amd64.deb",
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-desktop_0.4.14_amd64.deb",
+      "size": 45832286
     },
     {
       "platform": "linux",
       "arch": "amd64",
       "kind": "appimage",
       "name": "AppImage 版本",
-      "filename": "biglazycat-desktop-0.4.13-x86_64.AppImage",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-desktop-0.4.13-x86_64.AppImage",
-      "size": 109517304
+      "filename": "biglazycat-desktop-0.4.14-x86_64.AppImage",
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-desktop-0.4.14-x86_64.AppImage",
+      "size": 109677048
     },
     {
       "platform": "windows",
       "arch": "amd64",
       "kind": "installer",
       "name": "安装版本",
-      "filename": "biglazycat-desktop-0.4.13-windows-amd64-installer.exe",
-      "url": "https://api.biglazycatwriter.top/release/0.4.13/biglazycat-desktop-0.4.13-windows-amd64-installer.exe",
-      "size": 37217703
+      "filename": "biglazycat-desktop-0.4.14-windows-amd64-installer.exe",
+      "url": "https://api.biglazycatwriter.top/release/0.4.14/biglazycat-desktop-0.4.14-windows-amd64-installer.exe",
+      "size": 37196262
     }
   ],
   "metadata": {}
